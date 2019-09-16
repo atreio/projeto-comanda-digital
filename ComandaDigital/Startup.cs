@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
 
 namespace ComandaDigital
 {
@@ -33,6 +34,9 @@ namespace ComandaDigital
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddDbContext<ComandaDigitalContext>(options =>
+                    options.UseMySql(Configuration.GetConnectionString("ComandaDigitalContext"), builder => builder.MigrationsAssembly("ComandaDigital")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

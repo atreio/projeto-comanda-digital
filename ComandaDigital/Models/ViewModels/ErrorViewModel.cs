@@ -1,6 +1,6 @@
 using System;
 
-namespace ComandaDigital.Models
+namespace ComandaDigital.Models.ViewModels
 {
     public class ErrorViewModel
     {
