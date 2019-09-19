@@ -34,17 +34,12 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Clientes" asp-action="Index">Clientes</a>
                         </li>
-                        <!--
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Cadastros<b class="caret"></b></a>
                             <div class="dropdown-menu" aria-labelledby="themes">
                                 <a class="dropdown-item" href="#">Produtos</a>
                                 <a class="dropdown-item" href="#">Itens</a>
-                                <a class="dropdown-item" href="#">Usuários</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuários</a>
                             </div>
                         </li>
                     </ul>
