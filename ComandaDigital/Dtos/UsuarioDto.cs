@@ -1,8 +1,5 @@
-﻿using ComandaDigital.Enum;
-using System;
+﻿using ComandaDigital.Enums;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ComandaDigital.Dtos
 {

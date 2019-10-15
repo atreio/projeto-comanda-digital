@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ComandaDigital.Enum
+namespace ComandaDigital.Enums
 {
     public enum TipoUsuario
     {

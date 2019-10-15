@@ -1,5 +1,5 @@
 ﻿using ComandaDigital.Dtos;
-using ComandaDigital.Enum;
+using ComandaDigital.Enums;
 using ComandaDigital.Models.Base;
 
 namespace ComandaDigital.Models
