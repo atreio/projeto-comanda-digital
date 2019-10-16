@@ -1,0 +1,75 @@
+﻿@model ComandaDigital.Dtos.UsuarioDto;
+@using ComandaDigital.Enums;
+@using ComandaDigital.Helpers;
+@{
+    ViewData["Title"] = "Usuários";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <h4 class="page-title">Cadastro de usuários</h4>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card m-b-30">
+            <div class="card-body">
+                <h5 class="mt-0 tituloCard">@(Model.Id <= 0 ? "Novo " : "Editar ") Usuário</h5>
+                <!form id="formUsuario" action="@Url.Action("Salva", "Usuarios")" method="post">
+                    <input type="hidden" name="Id" value="@Model.Id" />
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Nome</label>
+                            <input type="text" asp-for="Nome" class="form-control" name="Nome" value="@Model.Nome" data-val="true" data-val-required="puta merda">
+                            <span asp-validation-for="Nome" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="form-group col-md-6">
+                            <label>E-mail</label>
+                            <input type="text" class="form-control" name="Email" value="@Model.Email">
+                        </div>
+                    </div> <!-- end row -->
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label>Tipo do usuário</label>
+                            <select class="form-control" name="TipoUsuario">
+                                <option value="">Selecione o tipo de usuário</option>
+                                @foreach (var enumTipoUsuario in @EnumHelper<TipoUsuario>.GetValues(TipoUsuario.Cliente))
+                                {
+                                    var description = EnumHelper<TipoUsuario>.GetDisplayValue(enumTipoUsuario);
+                                    var option = Model.TipoUsuario == enumTipoUsuario ? "selected" : string.Empty;
+                                    if (option.Equals("selected"))
+                                    {
+                                        <option value="@enumTipoUsuario" selected>@description</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@enumTipoUsuario">@description</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Telefone</label>
+                            <input type="text" class="form-control" name="Telefone" value="@Model.Telefone">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>CPF</label>
+                            <input type="text" class="form-control" name="Cpf" value="@Model.Cpf">
+                        </div>
+                    </div>
+                </!form> <!-- end form -->
+                <div class="button-items">
+                    <div class="form-group">
+                        <div>
+                            <a class="btn btn-info" href="#" onclick="validarForm('formUsuario')"><i class="fa fa-save"></i> SALVAR</a>
+                            <a class="btn btn-secondary" href="@Url.Action("Index", "Usuarios", new { Area = "" })"><i class="fa fa-backward"></i> VOLTAR</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div> <!-- end row -->

@@ -13,8 +13,8 @@ namespace ComandaDigital.Enums
         [Display(Name = "Cliente")]
         Cliente = 2,
         [Display(Name = "Cozinha")]
-        Cozinha = 2,
+        Cozinha = 3,
         [Display(Name = "Garçom")]
-        Garcom = 2
+        Garcom = 4
     }
 }

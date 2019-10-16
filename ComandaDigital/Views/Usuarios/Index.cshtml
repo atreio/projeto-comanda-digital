@@ -8,7 +8,7 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="page-title-box">
-            <h4 class="page-title">Cadastro de Materiais</h4>
+            <h4 class="page-title">Cadastro de usuários</h4>
         </div>
     </div>
 </div>
@@ -47,7 +47,7 @@
                                     <td>@usuario.Email</td>
                                     <td>@usuario.Telefone</td>
                                     <td>@usuario.Cpf</td>
-                                    <td style="text-align:center;"><a href="@Url.Action("Editar", "Material", new { Area = "", id = usuario.Id })">Editar</a></td>
+                                    <td style="text-align:center;"><a href="@Url.Action("Editar", "Usuarios", new { Area = "", id = usuario.Id })">Editar</a></td>
                                 </tr>
                             }
                         </tbody>
@@ -55,8 +55,8 @@
                     <div class="button-items">
                         <div class="form-group">
                             <div>
-                                <a class="btn btn-info" href="@Url.Action("Editar", "Material", new { Area = "Cadastros" })"><i class="fa fa-plus-square"></i> INCLUIR</a>
-                                <a class="btn btn-secondary" href="@Url.Action("Index", "Inicial", new { Area = "" })"><i class="fa fa-backward"></i> VOLTAR</a>
+                                <a class="btn btn-info" href="@Url.Action("Editar", "Usuarios", new { Area = "" })"><i class="fa fa-plus-square"></i> INCLUIR</a>
+                                <a class="btn btn-secondary" href="@Url.Action("Index", "Home", new { Area = "" })"><i class="fa fa-backward"></i> VOLTAR</a>
                             </div>
                         </div>
                     </div>
