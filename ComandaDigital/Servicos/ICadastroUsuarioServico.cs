@@ -8,5 +8,6 @@ namespace ComandaDigital.Servicos
         void EditarUsuario(UsuarioDto dto);
         UsuarioDto BuscaUsuarioPorId(int id);
         UsuarioListDto ListarTodosUsuarios();
+        UsuarioDto BuscaUsuarioPorEmailSenha(string email, string senha);
     }
 }

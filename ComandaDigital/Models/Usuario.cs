@@ -22,12 +22,13 @@ namespace ComandaDigital.Models
         public string Senha { get; set; }
         public string Telefone { get; set; }
         public string Cpf { get; set; }
+
         public void EditarUsuario(TipoUsuario tipoUsuario, string nome, string email, string senha, string telefone, string cpf)
         {
             TipoUsuario = tipoUsuario;
             Nome = nome;
             Email = email;
-            Senha = senha;
+            Senha = string.IsNullOrEmpty(senha) ? Senha : senha;
             Telefone = telefone;
             Cpf = cpf;
         }

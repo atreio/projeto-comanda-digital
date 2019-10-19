@@ -1,5 +1,7 @@
-﻿@using System.Security.Claims
-@using ComandaDigital.Helpers
+﻿@{
+    Layout = null;
+}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,42 +33,48 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Clientes" asp-action="Index">Clientes</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Cadastros<b class="caret"></b></a>
-                            <div class="dropdown-menu" aria-labelledby="themes">
-                                <a class="dropdown-item" href="#">Produtos</a>
-                                <a class="dropdown-item" href="#">Itens</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuários</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Acesso" asp-action="LogOut">Sair do Sistema</a>
-                        </li>
-                    </ul>
-                </div>
-                @UsuarioConectadoHelper.GetNome((User.Identity as ClaimsIdentity))
-                @UsuarioConectadoHelper.GetTipo((User.Identity as ClaimsIdentity))
             </div>
         </nav>
     </header>
     <div class="container">
-        <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
-            @RenderBody()
+            <div class="row">
+                <div class="col-4 offset-4" style="margin-top:50px;">
+                    <div class="card m-b-30">
+                        <div class="card-body">
+                            <h5 class="mt-0 tituloCard">Acesso ao Sistema</h5>
+                            <form id="formUsuario" action="@Url.Action("Autenticar", "Acesso")" method="post">
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label>E-mail</label>
+                                        <input type="text" class="form-control" name="email" required>
+                                    </div>
+                                </div> <!-- end row -->
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label>Senha</label>
+                                        <input type="password" class="form-control" name="senha" required>
+                                    </div>
+                                </div> <!-- end row -->
+
+                                <div class="button-items">
+                                    <div class="form-group">
+                                        <div>
+                                            <input type="submit" class="btn btn-info" href="#" value="ENTRAR">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form> <!-- end form -->
+                        </div>
+                    </div>
+                </div> <!-- end col -->
+            </div>
         </main>
     </div>
 
     <footer class="footer navbar-dark bg-dark text-muted">
         <div class="container">
-            &copy; 2019 - ComandaDigital
+            &copy; 2019 - ComandaDigital - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
 
@@ -89,7 +97,5 @@
         </script>
     </environment>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
-    @RenderSection("Scripts", required: false)
 </body>
 </html>

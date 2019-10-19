@@ -15,6 +15,13 @@ namespace ComandaDigital.Servicos.Impl
         {
             this.usuarioRepository = usuarioRepository;
         }
+
+        public UsuarioDto BuscaUsuarioPorEmailSenha(string email, string senha)
+        {
+            var usuario = usuarioRepository.GetUsuarioByEmailAndSenha(email, senha);
+            return usuario == null ? null : Mapper.Map<UsuarioDto>(usuario);
+        }
+
         public UsuarioDto BuscaUsuarioPorId(int id)
         {
             try

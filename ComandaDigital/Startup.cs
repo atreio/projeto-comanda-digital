@@ -13,6 +13,7 @@ using ComandaDigital.Repositorio;
 using ComandaDigital.Repositorio.Impl;
 using ComandaDigital.Servicos;
 using ComandaDigital.Servicos.Impl;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace ComandaDigital
 {
@@ -28,12 +29,7 @@ namespace ComandaDigital
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => { options.LoginPath = "/Acesso/Index"; options.Cookie.Name = "vWebCookie"; });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
@@ -66,7 +62,7 @@ namespace ComandaDigital
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

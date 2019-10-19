@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using ComandaDigital.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ComandaDigital.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public IActionResult Index()

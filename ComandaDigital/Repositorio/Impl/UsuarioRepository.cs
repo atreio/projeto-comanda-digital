@@ -12,11 +12,11 @@ namespace ComandaDigital.Repositorio.Impl
         {
 
         }
-        public Usuario GetUsuarioByUsernameAndSenha(string nome, string senha)
+        public Usuario GetUsuarioByEmailAndSenha(string nome, string senha)
         {
             return dbContext.Set<Usuario>()
                 .AsTracking()
-                .FirstOrDefault(u => u.Nome.Equals(nome) && u.Senha.Equals(senha));
+                .FirstOrDefault(u => u.Email.Equals(nome) && u.Senha.Equals(senha));
         }
     }
 }
