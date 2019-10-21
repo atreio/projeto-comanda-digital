@@ -1,7 +1,6 @@
 ﻿using ComandaDigital.Models;
 using ComandaDigital.Servicos.Base;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Linq;
 
 namespace ComandaDigital.Repositorio.Impl

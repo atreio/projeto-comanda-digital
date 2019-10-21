@@ -35,13 +35,18 @@ namespace ComandaDigital
                     options.UseMySql(Configuration.GetConnectionString("ComandaDigitalContext"), builder => builder.MigrationsAssembly("ComandaDigital")));
 
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<IEstabelecimentoRepository, EstabelecimentoRepository>();
+            services.AddScoped<IProdutoRepository, ProdutoRepository>();
 
             services.AddScoped<ICadastroUsuarioServico, CadastroUsuarioServico>();
+            services.AddScoped<IEstabelecimentoServico, EstabelecimentoServico>();
+            services.AddScoped<ICadastroProdutoServico, CadastroProdutoServico>();
 
             Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<Usuario, UsuarioDto>();
                 cfg.CreateMap<Estabelecimento, EstabelecimentoDto>();
+                cfg.CreateMap<Produto, ProdutoDto>();
             });
         }
 

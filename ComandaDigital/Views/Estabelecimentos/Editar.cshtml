@@ -1,0 +1,39 @@
+﻿@model ComandaDigital.Dtos.EstabelecimentoDto;
+@using ComandaDigital.Enums;
+@using ComandaDigital.Helpers;
+@{
+    ViewData["Title"] = "Estabelecimento";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <h4 class="page-title">Editar estabelecimento</h4>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card m-b-30">
+            <div class="card-body">
+                <!form id="formEstabelecimento" action="@Url.Action("Salva", "Estabelecimentos")" method="post">
+                    <input type="hidden" name="Id" value="@Model.Id" />
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label>Nome</label>
+                            <input type="text" asp-for="Nome" class="form-control" name="Nome" value="@Model.Nome">
+                        </div>
+                    </div> <!-- end row -->               
+                </!form> <!-- end form -->
+                <div class="button-items">
+                    <div class="form-group">
+                        <div>
+                            <a class="btn btn-info" href="#" onclick="validarForm('formEstabelecimento')"><i class="fa fa-save"></i> SALVAR</a>
+                            <a class="btn btn-secondary" href="@Url.Action("Index", "Usuarios", new { Area = "" })"><i class="fa fa-backward"></i> VOLTAR</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div> <!-- end row -->

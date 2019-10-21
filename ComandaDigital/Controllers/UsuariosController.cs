@@ -5,6 +5,7 @@ using System;
 
 namespace ComandaDigital.Controllers
 {
+    [Route("Usuarios/[controller]")]
     public class UsuariosController : Controller
     {
         private readonly ICadastroUsuarioServico cadastroUsuarioServico;

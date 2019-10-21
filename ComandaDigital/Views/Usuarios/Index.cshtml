@@ -1,6 +1,7 @@
 ﻿@model ComandaDigital.Dtos.UsuarioListDto;
 @using ComandaDigital.Enums;
-@using ComandaDigital.Helpers;
+@using System.Security.Claims
+@using ComandaDigital.Helpers
 @{
     ViewData["Title"] = "Usuários";
 }
@@ -47,7 +48,10 @@
                                     <td>@usuario.Email</td>
                                     <td>@usuario.Telefone</td>
                                     <td>@usuario.Cpf</td>
-                                    <td style="text-align:center;"><a href="@Url.Action("Editar", "Usuarios", new { Area = "", id = usuario.Id })">Editar</a></td>
+                                    @if (UsuarioConectadoHelper.GetTipo((User.Identity as ClaimsIdentity)) == "Gerente")
+                                    {
+                                        <td style="text-align:center;"><a href="@Url.Action("Editar", "Usuarios", new { Area = "", id = usuario.Id })">Editar</a></td>
+                                    }
                                 </tr>
                             }
                         </tbody>

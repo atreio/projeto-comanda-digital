@@ -38,7 +38,8 @@ namespace ComandaDigital.Controllers
                     new Claim(ClaimTypes.Name, usuario.Nome),
                     new Claim("IdUsuario", usuario.Id.ToString()),
                 };
-                var userIdentity = new ClaimsIdentity(claims, "loginVicino");
+
+                var userIdentity = new ClaimsIdentity(claims, "login");
                 ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
                 await HttpContext.SignInAsync(principal);
 
