@@ -9,5 +9,6 @@ namespace ComandaDigital.Servicos
         UsuarioDto BuscaUsuarioPorId(int id);
         UsuarioListDto ListarTodosUsuarios();
         UsuarioDto BuscaUsuarioPorEmailSenha(string email, string senha);
+        void ExcluirUsuario(UsuarioDto dto);
     }
 }

@@ -39,20 +39,29 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Clientes" asp-action="Index">Clientes</a>
                         </li>
+                        @if (UsuarioConectadoHelper.GetTipo((User.Identity as ClaimsIdentity)) != "Cliente")
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Cadastros<b class="caret"></b></a>
+                                <div class="dropdown-menu" aria-labelledby="themes">
+                                    @if (UsuarioConectadoHelper.GetTipo((User.Identity as ClaimsIdentity)) == "Gerente")
+                                    {
+                                        <a class="dropdown-item" asp-area="" asp-controller="Produtos" asp-action="Index">Produtos</a>
+                                    }
+                                    <a class="dropdown-item" href="#">Itens</a>
+                                    @if (UsuarioConectadoHelper.GetTipo((User.Identity as ClaimsIdentity)) == "Gerente")
+                                    {
+                                        <a class="dropdown-item" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuários</a>
+                                    }
+                                </div>
+                            </li>
+                        }
                         @if (UsuarioConectadoHelper.GetTipo((User.Identity as ClaimsIdentity)) == "Gerente")
                         {
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Estabelecimentos" asp-action="Index">Estabelecimento</a>
                             </li>
                         }
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Cadastros<b class="caret"></b></a>
-                            <div class="dropdown-menu" aria-labelledby="themes">
-                                <a class="dropdown-item" href="#">Produtos</a>
-                                <a class="dropdown-item" href="#">Itens</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuários</a>
-                            </div>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Acesso" asp-action="LogOut">Sair do Sistema</a>
                         </li>

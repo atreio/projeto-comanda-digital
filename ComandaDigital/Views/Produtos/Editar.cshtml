@@ -1,0 +1,47 @@
+﻿@model ComandaDigital.Dtos.ProdutoDto;
+@{
+    ViewData["Title"] = "Produtos";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <h4 class="page-title">Cadastro de Produtos</h4>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card m-b-30">
+            <div class="card-body">
+                <h5 class="mt-0 tituloCard">@(Model.ID <= 0 ? "Novo " : "Editar ") Usuário</h5>
+                <!form id="formProduto" action="@Url.Action("Salva", "Produtos")" method="post">
+                    <input type="hidden" name="Id" value="@Model.ID" />
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label>Nome</label>
+                            <input type="text" asp-for="Nome" class="form-control" name="Nome" value="@Model.Nome">
+                            <span asp-validation-for="Nome" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Valor de custo</label>
+                            <input type="text" class="form-control" name="ValorCusto" value="@Model.ValorCusto">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Valor de venda</label>
+                            <input type="text" class="form-control" name="ValorVenda" value="@Model.ValorVenda">
+                        </div>
+                    </div> <!-- end row -->
+                </!form> <!-- end form -->
+                <div class="button-items">
+                    <div class="form-group">
+                        <div>
+                            <a class="btn btn-info" href="#" onclick="validarForm('formProduto')"><i class="fa fa-save"></i> SALVAR</a>
+                            <a class="btn btn-secondary" href="@Url.Action("Index", "Produtos", new { Area = "" })"><i class="fa fa-backward"></i> VOLTAR</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div> <!-- end row -->

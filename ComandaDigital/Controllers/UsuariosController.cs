@@ -37,6 +37,22 @@ namespace ComandaDigital.Controllers
         }
 
         [Route("[action]")]
+        public IActionResult Excluir(UsuarioDto dto)
+        {
+            try
+            {
+                cadastroUsuarioServico.ExcluirUsuario(dto);
+                TempData["ocorreuGravacao"] = string.Format("Usuário {0} excluido com sucesso.", dto.Nome);
+
+                return RedirectToAction("Index", "Usuarios", new { Area = "", id = dto.Id });
+            }
+            catch (Exception ex)
+            {
+                return View("~/Views/Shared/Error.cshtml", ex);
+            }
+        }
+
+        [Route("[action]")]
         public IActionResult Salva(UsuarioDto dto)
         {
             try

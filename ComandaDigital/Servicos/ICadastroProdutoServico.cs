@@ -8,5 +8,6 @@ namespace ComandaDigital.Servicos
         void EditarProduto(ProdutoDto dto);
         ProdutoDto BuscaProdutoPorId(int id);
         ProdutoListDto ListarTodosProdutos();
+        void ExcluirProduto(ProdutoDto dto);
     }
 }

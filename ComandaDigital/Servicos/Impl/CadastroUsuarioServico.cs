@@ -43,6 +43,16 @@ namespace ComandaDigital.Servicos.Impl
             usuario.EditarUsuario(dto.TipoUsuario, dto.Nome, dto.Email, dto.Senha, dto.Telefone, dto.Cpf);
             usuarioRepository.Update(usuario);
         }
+
+        public void ExcluirUsuario(UsuarioDto dto)
+        {
+            var usuario = usuarioRepository.GetById(dto.Id);
+            if (usuario == null)
+                return;
+
+            usuarioRepository.Delete(usuario.Id);
+        }
+
         public UsuarioListDto ListarTodosUsuarios()
         {
             var usuario = usuarioRepository.GetAll();

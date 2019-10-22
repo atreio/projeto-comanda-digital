@@ -1,15 +1,15 @@
-﻿@model ComandaDigital.Dtos.UsuarioListDto;
+﻿@model ComandaDigital.Dtos.ProdutoListDto;
 @using ComandaDigital.Enums;
 @using System.Security.Claims
 @using ComandaDigital.Helpers
 @{
-    ViewData["Title"] = "Usuários";
+    ViewData["Title"] = "Produtod";
 }
 
 <div class="row">
     <div class="col-sm-12">
         <div class="page-title-box">
-            <h4 class="page-title">Cadastro de usuários</h4>
+            <h4 class="page-title">Cadastro de produtod</h4>
         </div>
     </div>
 </div>
@@ -18,7 +18,7 @@
         <div class="card m-b-30">
             <div class="card-body">
                 <div class="tab-content">
-                    <h5 class="mt-0 tituloCard">Listagem de usuários</h5>
+                    <h5 class="mt-0 tituloCard">Listagem de produtos</h5>
                     @if (TempData["ocorreuGravacao"] != null)
                     {
                         <div class="alert alert-success alert-dismissible">
@@ -27,30 +27,25 @@
                             @TempData["ocorreuGravacao"]
                         </div>
                     }
-                    <table id="tableMateriais" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <table id="tableProdutos" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th>Tipo</th>
                                 <th>Nome</th>
-                                <th>E-mail</th>
-                                <th>Telefone</th>
-                                <th>CPF</th>
+                                <th>Valor de custo</th>
+                                <th>Valor de venda</th>
                                 <th>Editar</th>
                                 <th>Excluir</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var usuario in Model.Usuarios)
+                            @foreach (var produto in Model.Produtos)
                             {
-                                var tipoUsuario = EnumHelper<TipoUsuario>.GetDisplayValue(usuario.TipoUsuario);
                             <tr>
-                                <td>@tipoUsuario</td>
-                                <td>@usuario.Nome</td>
-                                <td>@usuario.Email</td>
-                                <td>@usuario.Telefone</td>
-                                <td>@usuario.Cpf</td>
-                                <td style="text-align:center;"><a href="@Url.Action("Editar", "Usuarios", new { Area = "", id = usuario.Id })">Editar</a></td>
-                                <td style="text-align:center;"><a href="@Url.Action("Excluir", "Usuarios", new { Area = "", id = usuario.Id })">Excluir</a></td>
+                                <td>@produto.Nome</td>
+                                <td>@String.Format("{0:C}", produto.ValorCusto)</td>
+                                <td>@String.Format("{0:C}", produto.ValorVenda)</td>
+                                <td style="text-align:center;"><a href="@Url.Action("Editar", "Produtos", new { Area = "", id = produto.ID })">Editar</a></td>
+                                <td style="text-align:center;"><a href="@Url.Action("Excluir", "Produtos", new { Area = "", id = produto.ID })">Excluir</a></td>
                             </tr>
                             }
                         </tbody>
@@ -58,7 +53,7 @@
                     <div class="button-items">
                         <div class="form-group">
                             <div>
-                                <a class="btn btn-info" href="@Url.Action("Editar", "Usuarios", new { Area = "" })"><i class="fa fa-plus-square"></i> INCLUIR</a>
+                                <a class="btn btn-info" href="@Url.Action("Editar", "Produtos", new { Area = "" })"><i class="fa fa-plus-square"></i> INCLUIR</a>
                                 <a class="btn btn-secondary" href="@Url.Action("Index", "Home", new { Area = "" })"><i class="fa fa-backward"></i> VOLTAR</a>
                             </div>
                         </div>
@@ -70,7 +65,7 @@
 </div> <!-- end row -->
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#tableMateriais').DataTable({
+        $('#tableProdutos').DataTable({
             "paging": true,
             "ordering": false,
             "info": false

@@ -8,7 +8,7 @@ namespace ComandaDigital.Helpers
         {
             if (claimsIdentity != null)
             {
-                var c = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Name);
+                var c = claimsIdentity.FindFirst(ClaimTypes.Name);
 
                 if (c != null)
                 {
@@ -22,7 +22,7 @@ namespace ComandaDigital.Helpers
         {
             if (claimsIdentity != null)
             {
-                var c = claimsIdentity.FindFirst("IdUsuario");
+                var c = claimsIdentity.FindFirst("Id");
 
                 if (c != null)
                 {
@@ -36,7 +36,7 @@ namespace ComandaDigital.Helpers
         {
             if (claimsIdentity != null)
             {
-                var c = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Role);
+                var c = claimsIdentity.FindFirst(ClaimTypes.Role);
 
                 if (c != null)
                 {

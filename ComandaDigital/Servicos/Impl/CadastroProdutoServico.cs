@@ -1,38 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using AutoMapper;
 using ComandaDigital.Dtos;
+using ComandaDigital.Models;
+using ComandaDigital.Repositorio;
 
 namespace ComandaDigital.Servicos.Impl
 {
     public class CadastroProdutoServico : ICadastroProdutoServico
     {
-        private readonly ICadastroProdutoServico cadastroProdutoServico;
+        private readonly IProdutoRepository produtoRepository;
 
-        public CadastroProdutoServico(ICadastroProdutoServico cadastroProdutoServico)
+        public CadastroProdutoServico(IProdutoRepository produtoRepository)
         {
-            this.cadastroProdutoServico = cadastroProdutoServico;
+            this.produtoRepository = produtoRepository;
         }
 
         public ProdutoDto BuscaProdutoPorId(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var produto = produtoRepository.GetById(id);
+                return produto == null ? null : Mapper.Map<ProdutoDto>(produto);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void EditarProduto(ProdutoDto dto)
         {
-            throw new NotImplementedException();
+            var produto = produtoRepository.GetById(dto.ID);
+            if (produto == null)
+                return;
+
+            produto.Editar(dto.Nome, dto.ValorCusto, dto.ValorVenda);
+            produtoRepository.Update(produto);
+        }
+
+        public void ExcluirProduto(ProdutoDto dto)
+        {
+            var produto = produtoRepository.GetById(dto.ID);
+            if (produto == null)
+                return;
+
+            produtoRepository.Delete(produto.Id);
         }
 
         public ProdutoListDto ListarTodosProdutos()
         {
-            throw new NotImplementedException();
+            var produto = produtoRepository.GetAll();
+            var listProdutoDto = new ProdutoListDto();
+
+            listProdutoDto.Produtos = Mapper.Map<List<ProdutoDto>>(produto.OrderBy(d => d.Nome));
+            return listProdutoDto;
         }
 
         public void NovoProduto(ProdutoDto dto)
         {
-            throw new NotImplementedException();
+            var Produto = new Produto(dto.Nome, dto.ValorCusto, dto.ValorVenda);
+            produtoRepository.Create(Produto);
         }
     }
 }
