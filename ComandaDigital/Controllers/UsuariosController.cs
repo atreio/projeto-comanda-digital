@@ -57,18 +57,26 @@ namespace ComandaDigital.Controllers
         {
             try
             {
-                if (dto.Id <= 0)
+                if (!string.IsNullOrEmpty(dto.Nome))
                 {
-                    cadastroUsuarioServico.NovoUsuario(dto);
-                    TempData["ocorreuGravacao"] = string.Format("Usuário {0} cadastrado com sucesso.", dto.Nome);
+                    if (dto.Id <= 0)
+                    {
+                        cadastroUsuarioServico.NovoUsuario(dto);
+                        TempData["ocorreuGravacao"] = string.Format("Usuário {0} cadastrado com sucesso.", dto.Nome);
+                    }
+                    else
+                    {
+                        cadastroUsuarioServico.EditarUsuario(dto);
+                        TempData["ocorreuGravacao"] = string.Format("Usuário {0} editado com sucesso.", dto.Nome);
+                    }
+
+                    return RedirectToAction("Index", "Usuarios", new { Area = "", id = dto.Id });
                 }
                 else
                 {
-                    cadastroUsuarioServico.EditarUsuario(dto);
-                    TempData["ocorreuGravacao"] = string.Format("Usuário {0} editado com sucesso.", dto.Nome);
+                    TempData["ocorreuGravacao"] = string.Format("Campos em branco.");
+                    return RedirectToAction("Index", "Usuarios", new { Area = "", id = dto.Id });
                 }
-
-                return RedirectToAction("Index", "Usuarios", new { Area = "", id = dto.Id });
             }
             catch (Exception ex)
             {

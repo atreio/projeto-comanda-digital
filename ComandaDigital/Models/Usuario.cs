@@ -1,5 +1,6 @@
 ﻿using ComandaDigital.Enums;
 using ComandaDigital.Models.Base;
+using System.ComponentModel.DataAnnotations;
 
 namespace ComandaDigital.Models
 {
