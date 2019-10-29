@@ -20,16 +20,16 @@
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label>Nome</label>
-                            <input type="text" asp-for="Nome" class="form-control" name="Nome" value="@Model.Nome">
+                            <input type="text" asp-for="Nome" class="form-control" name="Nome" value="@Model.Nome" data-validacao="inputObrigatoria|Nome">
                             <span asp-validation-for="Nome" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label>Valor de custo</label>
-                            <input type="text" class="form-control" name="ValorCusto" value="@Model.ValorCusto">
+                            <input type="text" class="form-control" name="ValorCusto" value="@Model.ValorCusto" data-validacao="inputObrigatoria|Custo">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Valor de venda</label>
-                            <input type="text" class="form-control" name="ValorVenda" value="@Model.ValorVenda">
+                            <input type="text" class="form-control" name="ValorVenda" value="@Model.ValorVenda" data-validacao="inputObrigatoria|Venda">
                         </div>
                     </div> <!-- end row -->
                 </!form> <!-- end form -->

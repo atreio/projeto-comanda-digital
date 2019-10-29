@@ -35,16 +35,13 @@
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>                       
-                        @if (UsuarioConectadoHelper.GetTipo((User.Identity as ClaimsIdentity)) != "Cliente")
+                        </li>
+                        @if (UsuarioConectadoHelper.GetTipo((User.Identity as ClaimsIdentity)) == "Gerente")
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Cadastros<b class="caret"></b></a>
                                 <div class="dropdown-menu" aria-labelledby="themes">
-                                    @if (UsuarioConectadoHelper.GetTipo((User.Identity as ClaimsIdentity)) == "Gerente")
-                                    {
-                                        <a class="dropdown-item" asp-area="" asp-controller="Produtos" asp-action="Index">Produtos</a>
-                                    }
+                                    <a class="dropdown-item" asp-area="" asp-controller="Produtos" asp-action="Index">Produtos</a>
                                     <a class="dropdown-item" href="#">Itens</a>
                                     @if (UsuarioConectadoHelper.GetTipo((User.Identity as ClaimsIdentity)) == "Gerente")
                                     {
@@ -103,5 +100,33 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @RenderSection("Scripts", required: false)
+    <div class="wrapper">
+        <div class="container-fluid">
+            @RenderBody()
+            <div id="modalValidation" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title mt-0" id="myModalLabel">Preenchimento Incorreto</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <h4>Verifique os seguintes campos</h4>
+                            <span id="mensagensDeFalha"></span>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal"><i class="fa fa-check-circle-o"></i> OK</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+            <div id="modal-content-dinamic" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                @*conteudo modal dinamico*@
+            </div><!-- /.modal -->
+
+
+        </div> <!-- end container -->
+    </div>
 </body>
 </html>
