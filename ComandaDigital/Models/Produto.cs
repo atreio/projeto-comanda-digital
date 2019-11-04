@@ -14,8 +14,9 @@ namespace ComandaDigital.Models
         }
 
         public string Nome { get; set; }
-        public decimal? ValorCusto { get; private set; }
-        public decimal? ValorVenda { get; private set; }
+        public decimal? ValorCusto { get; set; }
+        public decimal? ValorVenda { get; set; }
+        public Estabelecimento Estabelecimento { get; set; }
 
         public void Editar(string nome, decimal? valorCusto, decimal? valorVenda)
         {
