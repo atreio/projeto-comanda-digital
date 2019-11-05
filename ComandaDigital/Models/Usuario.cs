@@ -1,6 +1,6 @@
 ﻿using ComandaDigital.Enums;
 using ComandaDigital.Models.Base;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace ComandaDigital.Models
 {
@@ -22,6 +22,8 @@ namespace ComandaDigital.Models
         public string Senha { get; set; }
         public string Telefone { get; set; }
         public string Cpf { get; set; }
+        public List<ItemPedido> ItensPedidos { get; set; }
+        public List<Pedido> Pedidos { get; set; }
 
         public void EditarUsuario(TipoUsuario tipoUsuario, string nome, string email, string senha, string telefone, string cpf)
         {

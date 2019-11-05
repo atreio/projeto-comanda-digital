@@ -48,6 +48,7 @@ namespace ComandaDigital
                 cfg.CreateMap<Estabelecimento, EstabelecimentoDto>();
                 cfg.CreateMap<Produto, ProdutoDto>();
                 cfg.CreateMap<Mesa, MesaDto>();
+                cfg.CreateMap<Pedido, PedidoDto>();
             });
         }
 

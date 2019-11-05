@@ -2,14 +2,16 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ComandaDigital.Migrations
 {
     [DbContext(typeof(ComandaDigitalContext))]
-    partial class ComandaDigitalContextModelSnapshot : ModelSnapshot
+    [Migration("20191105012410_Varios")]
+    partial class Varios
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

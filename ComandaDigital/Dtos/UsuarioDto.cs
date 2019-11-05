@@ -1,6 +1,5 @@
 ﻿using ComandaDigital.Enums;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace ComandaDigital.Dtos
 {

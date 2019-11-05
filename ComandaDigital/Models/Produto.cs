@@ -1,4 +1,5 @@
 ﻿using ComandaDigital.Models.Base;
+using System.Collections.Generic;
 
 namespace ComandaDigital.Models
 {
@@ -17,6 +18,7 @@ namespace ComandaDigital.Models
         public decimal? ValorCusto { get; set; }
         public decimal? ValorVenda { get; set; }
         public Estabelecimento Estabelecimento { get; set; }
+        public List<ItemPedido> ItensPedidos { get; set; }
 
         public void Editar(string nome, decimal? valorCusto, decimal? valorVenda)
         {

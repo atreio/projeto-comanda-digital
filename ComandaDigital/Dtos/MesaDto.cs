@@ -1,8 +1,5 @@
 ﻿using ComandaDigital.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ComandaDigital.Dtos
 {
@@ -13,10 +10,11 @@ namespace ComandaDigital.Dtos
         public int Quantidade { get; set; }
         public int EstabelecimentoId { get; set; }
         public Estabelecimento Estabelecimento { get; set; }
+        public List<Pedido> Pedidos { get; set; }
+    }
 
-        public class MesaDtoList
-        {
-            public List<MesaDto> Mesas { get; set; }
-        }
+    public class MesaListDto
+    {
+        public List<MesaDto> Mesas { get; set; }
     }
 }

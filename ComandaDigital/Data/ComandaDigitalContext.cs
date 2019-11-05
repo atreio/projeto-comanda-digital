@@ -12,6 +12,8 @@ public class ComandaDigitalContext : DbContext
     public DbSet<Estabelecimento> Estabelecimento { get; set; }
     public DbSet<Produto> Produto { get; set; }
     public DbSet<Mesa> Mesa { get; set; }
+    public DbSet<Pedido> Pedido { get; set; }
+    public DbSet<ItemPedido> ItemPedido { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -22,5 +24,7 @@ public class ComandaDigitalContext : DbContext
         modelBuilder.Entity<Estabelecimento>().HasKey(e => e.Id);
         modelBuilder.Entity<Produto>().HasKey(e => e.Id);
         modelBuilder.Entity<Mesa>().HasKey(e => e.Id);
+        modelBuilder.Entity<Pedido>().HasKey(e => e.Id);
+        modelBuilder.Entity<ItemPedido>().HasKey(e => e.Id);
     }
 }
