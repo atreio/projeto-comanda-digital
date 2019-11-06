@@ -2,14 +2,16 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ComandaDigital.Migrations
 {
     [DbContext(typeof(ComandaDigitalContext))]
-    partial class ComandaDigitalContextModelSnapshot : ModelSnapshot
+    [Migration("20191106031357_Varios2")]
+    partial class Varios2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,23 +51,27 @@ namespace ComandaDigital.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime?>("DataAtualizacao");
+                    b.Property<DateTime>("DataAtualizacao");
 
                     b.Property<DateTime?>("DataCriacao");
 
                     b.Property<string>("Descricao");
 
-                    b.Property<int>("PedidoId");
+                    b.Property<int?>("MesaId");
 
-                    b.Property<int>("ProdutoId");
+                    b.Property<int?>("PedidoId");
+
+                    b.Property<int?>("ProdutoId");
 
                     b.Property<int>("Quantidade");
 
                     b.Property<int>("Status");
 
-                    b.Property<int>("UsuarioId");
+                    b.Property<int?>("UsuarioId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MesaId");
 
                     b.HasIndex("PedidoId");
 
@@ -83,7 +89,7 @@ namespace ComandaDigital.Migrations
 
                     b.Property<string>("Descricao");
 
-                    b.Property<int>("EstabelecimentoId");
+                    b.Property<int?>("EstabelecimentoId");
 
                     b.Property<string>("Numero");
 
@@ -101,9 +107,9 @@ namespace ComandaDigital.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("MesaId");
+                    b.Property<int?>("MesaId");
 
-                    b.Property<int>("UsuarioId");
+                    b.Property<int?>("UsuarioId");
 
                     b.HasKey("Id");
 
@@ -119,7 +125,7 @@ namespace ComandaDigital.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("EstabelecimentoId");
+                    b.Property<int?>("EstabelecimentoId");
 
                     b.Property<string>("Nome");
 
@@ -158,49 +164,46 @@ namespace ComandaDigital.Migrations
 
             modelBuilder.Entity("ComandaDigital.Models.ItemPedido", b =>
                 {
-                    b.HasOne("ComandaDigital.Models.Pedido", "Pedido")
+                    b.HasOne("ComandaDigital.Models.Mesa")
                         .WithMany("ItensPedidos")
-                        .HasForeignKey("PedidoId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("MesaId");
+
+                    b.HasOne("ComandaDigital.Models.Pedido")
+                        .WithMany("ItensPedidos")
+                        .HasForeignKey("PedidoId");
 
                     b.HasOne("ComandaDigital.Models.Produto", "Produto")
                         .WithMany("ItensPedidos")
-                        .HasForeignKey("ProdutoId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ProdutoId");
 
                     b.HasOne("ComandaDigital.Models.Usuario", "Usuario")
                         .WithMany("ItensPedidos")
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("UsuarioId");
                 });
 
             modelBuilder.Entity("ComandaDigital.Models.Mesa", b =>
                 {
                     b.HasOne("ComandaDigital.Models.Estabelecimento", "Estabelecimento")
-                        .WithMany("Mesas")
-                        .HasForeignKey("EstabelecimentoId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany()
+                        .HasForeignKey("EstabelecimentoId");
                 });
 
             modelBuilder.Entity("ComandaDigital.Models.Pedido", b =>
                 {
                     b.HasOne("ComandaDigital.Models.Mesa", "Mesa")
-                        .WithMany("Pedidos")
-                        .HasForeignKey("MesaId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany()
+                        .HasForeignKey("MesaId");
 
                     b.HasOne("ComandaDigital.Models.Usuario", "Usuario")
                         .WithMany("Pedidos")
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("UsuarioId");
                 });
 
             modelBuilder.Entity("ComandaDigital.Models.Produto", b =>
                 {
                     b.HasOne("ComandaDigital.Models.Estabelecimento", "Estabelecimento")
-                        .WithMany("Produtos")
-                        .HasForeignKey("EstabelecimentoId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany()
+                        .HasForeignKey("EstabelecimentoId");
                 });
 #pragma warning restore 612, 618
         }

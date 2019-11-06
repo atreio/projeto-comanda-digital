@@ -37,10 +37,14 @@ namespace ComandaDigital
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<IEstabelecimentoRepository, EstabelecimentoRepository>();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
+            services.AddScoped<IMesaRepository, MesaRepository>();
+            services.AddScoped<IPedidoRepository, PedidoRepository>();
 
             services.AddScoped<ICadastroUsuarioServico, CadastroUsuarioServico>();
             services.AddScoped<IEstabelecimentoServico, EstabelecimentoServico>();
             services.AddScoped<ICadastroProdutoServico, CadastroProdutoServico>();
+            services.AddScoped<ICadastroMesaServico, CadastroMesaServico>();
+            services.AddScoped<IPedidoServico, PedidoServico>();
 
             Mapper.Initialize(cfg =>
             {
@@ -49,6 +53,7 @@ namespace ComandaDigital
                 cfg.CreateMap<Produto, ProdutoDto>();
                 cfg.CreateMap<Mesa, MesaDto>();
                 cfg.CreateMap<Pedido, PedidoDto>();
+                cfg.CreateMap<ItemPedido, ItemPedidoDto>();
             });
         }
 

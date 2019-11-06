@@ -1,15 +1,12 @@
-﻿@model ComandaDigital.Dtos.ProdutoListDto;
-@using ComandaDigital.Enums;
-@using System.Security.Claims
-@using ComandaDigital.Helpers
+﻿@model ComandaDigital.Dtos.MesaListDto;
 @{
-    ViewData["Title"] = "Produto";
+    ViewData["Title"] = "Mesa";
 }
 
 <div class="row">
     <div class="col-sm-12">
         <div class="page-title-box">
-            <h4 class="page-title">Cadastro de produto</h4>
+            <h4 class="page-title">Cadastro de mesas</h4>
         </div>
     </div>
 </div>
@@ -18,7 +15,7 @@
         <div class="card m-b-30">
             <div class="card-body">
                 <div class="tab-content">
-                    <h5 class="mt-0 tituloCard">Listagem de produtos</h5>
+                    <h5 class="mt-0 tituloCard">Listagem de mesas</h5>
                     @if (TempData["ocorreuGravacao"] != null)
                     {
                         <div class="alert alert-success alert-dismissible">
@@ -30,22 +27,22 @@
                     <table id="tableProdutos" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th>Nome</th>
-                                <th>Valor de custo</th>
-                                <th>Valor de venda</th>
+                                <th>Numero da mesa</th>
+                                <th>Quantidade</th>
+                                <th>Descrição</th>
                                 <th>Editar</th>
                                 <th>Excluir</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var produto in Model.Produtos)
+                            @foreach (var mesa in Model.Mesas)
                             {
                             <tr>
-                                <td>@produto.Nome</td>
-                                <td>@String.Format("{0:C}", produto.ValorCusto)</td>
-                                <td>@String.Format("{0:C}", produto.ValorVenda)</td>
-                                <td style="text-align:center;"><a href="@Url.Action("Editar", "Produtos", new { Area = "", id = produto.ID })">Editar</a></td>
-                                <td style="text-align:center;"><a href="@Url.Action("Excluir", "Produtos", new { Area = "", id = produto.ID })">Excluir</a></td>
+                                <td>@mesa.Numero</td>
+                                <td>@mesa.Quantidade</td>
+                                <td>@mesa.Descricao</td>
+                                <td style="text-align:center;"><a href="@Url.Action("Editar", "Mesas", new { Area = "", id = mesa.Id })">Editar</a></td>
+                                <td style="text-align:center;"><a href="@Url.Action("Excluir", "Mesas", new { Area = "", id = mesa.Id })">Excluir</a></td>
                             </tr>
                             }
                         </tbody>
@@ -53,7 +50,7 @@
                     <div class="button-items">
                         <div class="form-group">
                             <div>
-                                <a class="btn btn-info" href="@Url.Action("Editar", "Produtos", new { Area = "" })"><i class="fa fa-plus-square"></i> INCLUIR</a>
+                                <a class="btn btn-info" href="@Url.Action("Editar", "Mesas", new { Area = "" })"><i class="fa fa-plus-square"></i> INCLUIR</a>
                                 <a class="btn btn-secondary" href="@Url.Action("Index", "Home", new { Area = "" })"><i class="fa fa-backward"></i> VOLTAR</a>
                             </div>
                         </div>

@@ -46,6 +46,7 @@
                                     @if (UsuarioConectadoHelper.GetTipo((User.Identity as ClaimsIdentity)) == "Gerente")
                                     {
                                         <a class="dropdown-item" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuários</a>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Mesas" asp-action="Index">Mesas</a>
                                     }
                                 </div>
                             </li>

@@ -9,6 +9,7 @@ namespace ComandaDigital.Controllers
     public class UsuariosController : Controller
     {
         private readonly ICadastroUsuarioServico cadastroUsuarioServico;
+
         public UsuariosController(ICadastroUsuarioServico cadastroUsuario)
         {
             this.cadastroUsuarioServico = cadastroUsuario;

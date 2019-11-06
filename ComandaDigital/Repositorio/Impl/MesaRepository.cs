@@ -5,7 +5,7 @@ namespace ComandaDigital.Repositorio.Impl
 {
     public class MesaRepository : CrudRepository<Mesa>, IMesaRepository
     {
-        MesaRepository(ComandaDigitalContext dbContext) : base(dbContext)
+        public MesaRepository(ComandaDigitalContext dbContext) : base(dbContext)
         {
 
         }

@@ -7,19 +7,23 @@ namespace ComandaDigital.Models
     {
         public Mesa() { }
 
-        public Mesa(string descricao, int quantidade)
+        public Mesa(string numero, string descricao, int quantidade)
         {
+            Numero = numero;
             Descricao = descricao;
             Quantidade = quantidade;
         }
 
+        public string Numero { get; set; }
         public string Descricao { get; set; }
         public int Quantidade { get; set; }
+        public int EstabelecimentoId { get; set; }
         public Estabelecimento Estabelecimento { get; set; }
-        public List<ItemPedido> ItensPedidos { get; set; }
+        public List<Pedido> Pedidos { get; set; }
 
-        public void Editar(string descricao, int quantidade)
+        public void Editar(string numero, string descricao, int quantidade)
         {
+            Numero = numero;
             Descricao = descricao;
             Quantidade = quantidade;
         }

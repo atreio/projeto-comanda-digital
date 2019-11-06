@@ -17,6 +17,7 @@ namespace ComandaDigital.Models
         public string Nome { get; set; }
         public decimal? ValorCusto { get; set; }
         public decimal? ValorVenda { get; set; }
+        public int EstabelecimentoId { get; set; }
         public Estabelecimento Estabelecimento { get; set; }
         public List<ItemPedido> ItensPedidos { get; set; }
 

@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using AutoMapper;
 using ComandaDigital.Dtos;
+using ComandaDigital.Models;
 using ComandaDigital.Repositorio;
 
 namespace ComandaDigital.Servicos.Impl
@@ -15,27 +19,49 @@ namespace ComandaDigital.Servicos.Impl
 
         public MesaDto BuscaMesaPorId(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var mesa = mesaRepository.GetById(id);
+                return mesa == null ? null : Mapper.Map<MesaDto>(mesa);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void EditarMesa(MesaDto dto)
         {
-            throw new NotImplementedException();
+            var mesa = mesaRepository.GetById(dto.Id);
+            if (mesa == null)
+                return;
+
+            mesa.Editar(dto.Numero, dto.Descricao, dto.Quantidade);
+            mesaRepository.Update(mesa);
         }
 
         public void ExcluirMesa(MesaDto dto)
         {
-            throw new NotImplementedException();
+            var mesa = mesaRepository.GetById(dto.Id);
+            if (mesa == null)
+                return;
+
+            mesaRepository.Delete(mesa.Id);
         }
 
         public MesaListDto ListarTodasMesas()
         {
-            throw new NotImplementedException();
+            var mesa = mesaRepository.GetAll();
+            var listMesaDto = new MesaListDto();
+
+            listMesaDto.Mesas = Mapper.Map<List<MesaDto>>(mesa.OrderBy(d => d.Numero));
+            return listMesaDto;
         }
 
         public void NovaMesa(MesaDto dto)
         {
-            throw new NotImplementedException();
+            var mesa = new Mesa(dto.Numero, dto.Descricao, dto.Quantidade);
+            mesaRepository.Create(mesa);
         }
     }
 }

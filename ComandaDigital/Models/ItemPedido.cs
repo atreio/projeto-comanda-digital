@@ -6,14 +6,42 @@ namespace ComandaDigital.Models
 {
     public class ItemPedido : IEntity
     {
-        ItemPedido() { }
+        public ItemPedido() { }
+
+        public ItemPedido(int quantidade, StatusPedido status, int cozinheiroId, int garcomId, int produtoId, int pedidoId, string descricao)
+        {
+            Quantidade = quantidade;
+            DataCriacao = DateTime.Now;
+            Status = status;
+            CozinheiroId = cozinheiroId;
+            GarcomId = garcomId;
+            ProdutoId = produtoId;
+            PedidoId = pedidoId;
+            Descricao = descricao;
+        }
 
         public int Quantidade { get; set; }
         public DateTime? DataCriacao { get; set; }
-        public DateTime DataAtualizacao { get; set; }
+        public DateTime? DataAtualizacao { get; set; }
         public StatusPedido Status { get; set; }
+        public int CozinheiroId { get; set; }
+        public int GarcomId { get; set; }
         public Usuario Usuario { get; set; }
+        public int ProdutoId { get; set; }
         public Produto Produto { get; set; }
+        public int PedidoId { get; set; }
+        public Pedido Pedido { get; set; }
         public string Descricao { get; set; }
+
+        public void Editar(int quantidade, StatusPedido status, int usuarioId, int produtoId, int pedidoId, string descricao)
+        {
+            Quantidade = quantidade;
+            DataAtualizacao = DateTime.Now;
+            Status = status;
+            UsuarioId = usuarioId;
+            ProdutoId = produtoId;
+            PedidoId = pedidoId;
+            Descricao = descricao;
+        }
     }
 }
