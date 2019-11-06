@@ -15,7 +15,10 @@ namespace ComandaDigital.Dtos
         public Mesa Mesa { get; set; }
         public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
+        public ItemPedidoDto ItemPedido { get; set; }
         public List<ItemPedidoDto> ItensPediddos { get; set; }
+        public List<UsuarioDto> ListaUsuarios { get; set; }
+        public List<MesaDto> ListaMesas { get; set; }
     }
 
     public class PedidoListDto

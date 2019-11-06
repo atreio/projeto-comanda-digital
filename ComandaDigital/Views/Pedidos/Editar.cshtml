@@ -1,0 +1,58 @@
+﻿@model ComandaDigital.Dtos.PedidoDto;
+@{
+    ViewData["Title"] = "Pedidos";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <h4 class="page-title">Cadastro de Pedidos</h4>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card m-b-30">
+            <div class="card-body">
+                <h5 class="mt-0 tituloCard">@(Model.Id <= 0 ? "Novo " : "Editar ") Pedido</h5>
+                <!form id="formPedido" action="@Url.Action("Salva", "Pedidos")" method="post">
+                    <input type="hidden" name="Id" value="@Model.Id" />
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label>Nome do cliente</label>
+                            <select class="form-control" name="Nome" data-validacao="selectObrigatorio|Nome">
+                                <option value="">Selecione o cliente</option>
+                                @foreach (var nomeUsuario in Model.ListaUsuarios)
+                                {
+                                    <!option value="@nomeUsuario.Id" @(Model.UsuarioId == nomeUsuario.Id ? "selected" : string.Empty)>@nomeUsuario.Nome</!option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Numero da mesa</label>
+                            <select class="form-control" name="Nome" data-validacao="selectObrigatorio|Nome">
+                                <option value="">Selecione a mesa</option>
+                                @foreach (var numeroMesa in Model.ListaMesas)
+                                {
+                                    <!option value="@numeroMesa.Id" @(Model.MesaId == numeroMesa.Id ? "selected" : string.Empty)>@numeroMesa.Numero</!option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Descrição</label>
+                            <input type="text" class="form-control" name="Descricao" value="@Model.ItemPedido.Descricao">
+                        </div>
+                    </div> <!-- end row -->
+                </!form> <!-- end form -->
+                <div class="button-items">
+                    <div class="form-group">
+                        <div>
+                            <a class="btn btn-info" href="#" onclick="validarForm('formPedido')"><i class="fa fa-save"></i> SALVAR</a>
+                            <a class="btn btn-secondary" href="@Url.Action("Index", "Pedidos", new { Area = "" })"><i class="fa fa-backward"></i> VOLTAR</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div> <!-- end row -->

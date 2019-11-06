@@ -19,5 +19,11 @@ namespace ComandaDigital.Models
         public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
         public List<ItemPedido> ItensPedidos { get; set; }
+
+        public void Editar(int mesaId, int usuarioId)
+        {
+            MesaId = mesaId;
+            UsuarioId = usuarioId;
+        }
     }
 }

@@ -8,12 +8,11 @@ namespace ComandaDigital.Models
     {
         public ItemPedido() { }
 
-        public ItemPedido(int quantidade, StatusPedido status, int cozinheiroId, int garcomId, int produtoId, int pedidoId, string descricao)
+        public ItemPedido(int quantidade, int garcomId, int produtoId, int pedidoId, string descricao)
         {
             Quantidade = quantidade;
             DataCriacao = DateTime.Now;
-            Status = status;
-            CozinheiroId = cozinheiroId;
+            Status = StatusPedido.PedidodRealizado;
             GarcomId = garcomId;
             ProdutoId = produtoId;
             PedidoId = pedidoId;
@@ -33,12 +32,12 @@ namespace ComandaDigital.Models
         public Pedido Pedido { get; set; }
         public string Descricao { get; set; }
 
-        public void Editar(int quantidade, StatusPedido status, int usuarioId, int produtoId, int pedidoId, string descricao)
+        public void Editar(int quantidade, StatusPedido status, int garcomId, int produtoId, int pedidoId, string descricao)
         {
             Quantidade = quantidade;
             DataAtualizacao = DateTime.Now;
             Status = status;
-            UsuarioId = usuarioId;
+            GarcomId = garcomId;
             ProdutoId = produtoId;
             PedidoId = pedidoId;
             Descricao = descricao;

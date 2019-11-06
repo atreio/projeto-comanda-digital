@@ -2,8 +2,6 @@
 using ComandaDigital.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ComandaDigital.Dtos
 {
@@ -15,6 +13,7 @@ namespace ComandaDigital.Dtos
         public DateTime? DataAtualizacao { get; set; }
         public StatusPedido Status { get; set; }
         public int UsuarioId { get; set; }
+        public int GarcomId { get; set; }
         public Usuario Usuario { get; set; }
         public int ProdutoId { get; set; }
         public Produto Produto { get; set; }
