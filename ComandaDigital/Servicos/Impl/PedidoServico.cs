@@ -54,7 +54,7 @@ namespace ComandaDigital.Servicos.Impl
             var pedido = pedidoRepository.GetAll();
             var listPedidoDto = new PedidoListDto();
 
-            listPedidoDto.Pedidos = Mapper.Map<List<PedidoDto>>(pedido.OrderBy(d => d.Mesa.Numero));
+            listPedidoDto.Pedidos = Mapper.Map<List<PedidoDto>>(pedido.OrderBy(d => d.MesaId));
             return listPedidoDto;
         }
 

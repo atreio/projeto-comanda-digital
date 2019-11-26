@@ -7,7 +7,6 @@ namespace ComandaDigital.Models
     public class ItemPedido : IEntity
     {
         public ItemPedido() { }
-
         public ItemPedido(int quantidade, int garcomId, int produtoId, int pedidoId, string descricao)
         {
             Quantidade = quantidade;
@@ -32,11 +31,10 @@ namespace ComandaDigital.Models
         public Pedido Pedido { get; set; }
         public string Descricao { get; set; }
 
-        public void Editar(int quantidade, StatusPedido status, int garcomId, int produtoId, int pedidoId, string descricao)
+        public void Editar(int quantidade, int garcomId, int produtoId, int pedidoId, string descricao)
         {
             Quantidade = quantidade;
             DataAtualizacao = DateTime.Now;
-            Status = status;
             GarcomId = garcomId;
             ProdutoId = produtoId;
             PedidoId = pedidoId;

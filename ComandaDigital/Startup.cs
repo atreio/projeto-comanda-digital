@@ -39,12 +39,14 @@ namespace ComandaDigital
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
             services.AddScoped<IMesaRepository, MesaRepository>();
             services.AddScoped<IPedidoRepository, PedidoRepository>();
+            services.AddScoped<IItemPedidoRepository, ItemPedidoRepository>();
 
             services.AddScoped<ICadastroUsuarioServico, CadastroUsuarioServico>();
             services.AddScoped<IEstabelecimentoServico, EstabelecimentoServico>();
             services.AddScoped<ICadastroProdutoServico, CadastroProdutoServico>();
             services.AddScoped<ICadastroMesaServico, CadastroMesaServico>();
             services.AddScoped<IPedidoServico, PedidoServico>();
+            services.AddScoped<ICadastroItemPedidoServico, CadastroItemPedidoServico>();
 
             Mapper.Initialize(cfg =>
             {

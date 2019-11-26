@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ComandaDigital.Dtos;
 using ComandaDigital.Servicos;
 using Microsoft.AspNetCore.Mvc;
@@ -30,6 +27,29 @@ namespace ComandaDigital.Controllers
 
         [Route("[action]")]
         public IActionResult Editar(int id)
+        {
+            try
+            {
+                var pedido = new PedidoDto();
+                var itemPedido = new ItemPedidoDto();
+                pedido.ItemPedido = itemPedido;
+
+                if (id > 0)
+                    pedido = pedidoServico.BuscaPedidoPorId(id);
+
+                pedido.ListaUsuarios = usuarioServico.ListarTodosUsuarios().Usuarios;
+                pedido.ListaMesas = mesaServico.ListarTodasMesas().Mesas;
+
+                return View(pedido);
+            }
+            catch (Exception ex)
+            {
+                return View("~/Views/Shared/Error.cshtml", ex);
+            }
+        }
+
+        [Route("[action]")]
+        public IActionResult EditarItem(int id)
         {
             try
             {
