@@ -24,5 +24,7 @@ namespace ComandaDigital.Dtos
     public class PedidoListDto
     {
         public List<PedidoDto> Pedidos { get; set; }
+        public List<MesaDto> Mesas { get; set; }
+        public List<UsuarioDto> Usuarios { get; set; }
     }
 }

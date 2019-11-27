@@ -1,12 +1,12 @@
-﻿@model ComandaDigital.Dtos.PedidoDto;
+﻿@model ComandaDigital.Dtos.ItemPedidoDto;
 @{
-    ViewData["Title"] = "Pedidos";
+    ViewData["Title"] = "Itens pedidos";
 }
 
 <div class="row">
     <div class="col-sm-12">
         <div class="page-title-box">
-            <h4 class="page-title">Cadastro de Pedidos</h4>
+            <h4 class="page-title">Cadastro de Itens pedidos</h4>
         </div>
     </div>
 </div>
@@ -14,17 +14,17 @@
     <div class="col-12">
         <div class="card m-b-30">
             <div class="card-body">
-                <h5 class="mt-0 tituloCard">@(Model.Id <= 0 ? "Novo " : "Editar ") Pedido</h5>
-                <!form id="formPedido" action="@Url.Action("Salva", "Pedidos")" method="post">
+                <h5 class="mt-0 tituloCard">@(Model.Id <= 0 ? "Novo " : "Editar ") Itens</h5>
+                <!form id="formPedido" action="@Url.Action("Salva", "Itens pedidos")" method="post">
                     <input type="hidden" name="Id" value="@Model.Id" />
                     <div class="form-row">
                         <div class="form-group col-md-3">
-                            <label>Nome do cliente</label>
-                            <select class="form-control" name="Nome" data-validacao="selectObrigatorio|Nome">
-                                <option value="">Selecione o cliente</option>
-                                @foreach (var nomeUsuario in Model.ListaUsuarios)
+                            <label>Nome do item</label>
+                            <select class="form-control" name="Produto_Id" data-validacao="selectObrigatorio|Nome">
+                                <option value="">Selecione o item</option>
+                                @foreach (var nomeProduto in Model.ListaProdutos)
                                 {
-                                    <!option value="@nomeUsuario.Id" @(Model.UsuarioId == nomeUsuario.Id ? "selected" : string.Empty)>@nomeUsuario.Nome</!option>
+                                    <!option value="@nomeProduto.ID" @(Model.UsuarioId == nomeProduto.ID ? "selected" : string.Empty)>@nomeProduto.Nome</!option>
                                 }
                             </select>
                         </div>

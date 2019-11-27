@@ -20,6 +20,8 @@ namespace ComandaDigital.Dtos
         public int PedidoId { get; set; }
         public Pedido Pedido { get; set; }
         public string Descricao { get; set; }
+        public List<ProdutoDto> ListaProdutos { get; set; }
+        public List<UsuarioDto> ListaUsuarios{ get; set; }
     }
 
     public class ItemPedidoListDto
