@@ -42,7 +42,7 @@
                             <tr>
                                 <td>@pedido.MesaId</td>
                                 <td>@pedido.UsuarioId</td>
-                                <td style="text-align:center;"><a href="@Url.Action("Editar", "Pedidos", new { Area = "", id = pedido.Id })">Editar</a></td>
+                                <td style="text-align:center;"><a href="@Url.Action("EditarItem", "Pedidos", new { Area = "", id = pedido.Id })">Editar</a></td>
                                 <td style="text-align:center;"><a href="@Url.Action("Excluir", "Pedidos", new { Area = "", id = pedido.Id })">Excluir</a></td>
                             </tr>
                             }

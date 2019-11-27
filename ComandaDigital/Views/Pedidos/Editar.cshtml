@@ -19,7 +19,7 @@
                         <a class="nav-link active show" href="@Url.Action("Editar", "Pedidos", new { Area = "", id = Model.Id })" role="tab" aria-selected="true">Pedidos</a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link @(Model.Id <= 0 ? "disabled " : string.Empty) " href="@(Model.Id <= 0 ? "# " : Url.Action("EditarItemPedido", "Pedidos", new { Area = "", id = Model.Id }))" role="tab" aria-selected="true">Itens pedidos</a>
+                        <a class="nav-link @(Model.Id <= 0 ? "disabled " : string.Empty) " href="@(Model.Id <= 0 ? "# " : Url.Action("EditarItem", "Pedidos", new { Area = "", id = Model.Id }))" role="tab" aria-selected="true">Itens pedidos</a>
                     </li>
                 </ul>
                 <h5 class="mt-0 tituloCard">@(Model.Id <= 0 ? "Novo " : "Editar ") Pedido</h5>
