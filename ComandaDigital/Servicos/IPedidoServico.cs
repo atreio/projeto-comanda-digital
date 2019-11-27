@@ -8,6 +8,8 @@ namespace ComandaDigital.Servicos
         void EditarPedido(PedidoDto dto);
         PedidoDto BuscaPedidoPorId(int id);
         PedidoListDto ListarTodosPedidos();
+        PedidoDto BuscarItemPorId(int id);
+        void SalvarItem(ItemPedidoDto dto);
         void ExcluirPedido(PedidoDto dto);
     }
 }

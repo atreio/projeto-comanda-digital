@@ -1,4 +1,4 @@
-﻿@model ComandaDigital.Dtos.PedidoListDto;
+﻿@model ComandaDigital.Dtos.ItemPedidoListDto;
 @using ComandaDigital.Enums;
 @using ComandaDigital.Helpers
 @{
@@ -16,6 +16,14 @@
     <div class="col-12">
         <div class="card m-b-30">
             <div class="card-body">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link show" href="@Url.Action("Editar", "Pedidos", new { Area = "", id = Model.PedidoId })" role="tab" aria-selected="true">Pedidos</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link active" href="@Url.Action("EditarItemPedido", "Pedidos", new { Area = "", id = Model.PedidoId })" role="tab" aria-selected="true">Itens pedidos</a>
+                    </li>
+                </ul>
                 <div class="tab-content">
                     <h5 class="mt-0 tituloCard">Listagem de pedidoss</h5>
                     @if (TempData["ocorreuGravacao"] != null)
@@ -31,27 +39,26 @@
                             <tr>
                                 <th>Numero da mesa</th>
                                 <th>Nome do cliente</th>
-                                <th>Nome do Garçom</th>
                                 <th>Editar</th>
                                 <th>Excluir</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var pedido in Model.Pedidos)
+                            @foreach (var pedido in Model.ItensPedidos)
                             {
-                            <tr>
-                                <td>@pedido.MesaId</td>
-                                <td>@pedido.UsuarioId</td>
-                                <td style="text-align:center;"><a href="@Url.Action("Editar", "Pedidos", new { Area = "", id = pedido.Id })">Editar</a></td>
-                                <td style="text-align:center;"><a href="@Url.Action("Excluir", "Pedidos", new { Area = "", id = pedido.Id })">Excluir</a></td>
-                            </tr>
+                                <tr>
+                                    <td>@pedido.Produto.Nome</td>
+                                    <td>@pedido.Usuario.Nome</td>
+                                    <td style="text-align:center;"><a href="@Url.Action("EditarItem", "Pedidos", new { Area = "", id = pedido.Id })">Editar</a></td>
+                                    <td style="text-align:center;"><a href="@Url.Action("Excluir", "Pedidos", new { Area = "", id = pedido.Id })">Excluir</a></td>
+                                </tr>
                             }
                         </tbody>
                     </table>
                     <div class="button-items">
                         <div class="form-group">
                             <div>
-                                <a class="btn btn-info" href="@Url.Action("Editar", "Pedidos", new { Area = "" })"><i class="fa fa-plus-square"></i> INCLUIR</a>
+                                <a class="btn btn-info" href="@Url.Action("NovoItem", "Pedidos", new { Area = "" })"><i class="fa fa-plus-square"></i> INCLUIR</a>
                                 <a class="btn btn-secondary" href="@Url.Action("Index", "Home", new { Area = "" })"><i class="fa fa-backward"></i> VOLTAR</a>
                             </div>
                         </div>

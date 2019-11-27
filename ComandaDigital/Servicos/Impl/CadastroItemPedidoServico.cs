@@ -54,8 +54,8 @@ namespace ComandaDigital.Servicos.Impl
 
         public void NovoItemPedido(ItemPedidoDto dto)
         {
-            var ItemPedido = new ItemPedido(dto.Quantidade, dto.GarcomId, dto.ProdutoId, dto.PedidoId, dto.Descricao);
-            itemPedidoRepository.Create(ItemPedido);
+            //var ItemPedido = new ItemPedido(dto.Quantidade, dto.GarcomId, dto.ProdutoId, dto.PedidoId, dto.Descricao, );
+            //itemPedidoRepository.Create(ItemPedido);
         }
     }
 }

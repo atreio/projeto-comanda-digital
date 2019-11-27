@@ -14,11 +14,19 @@
     <div class="col-12">
         <div class="card m-b-30">
             <div class="card-body">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active show" href="@Url.Action("Editar", "Pedidos", new { Area = "", id = Model.Id })" role="tab" aria-selected="true">Pedidos</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link @(Model.Id <= 0 ? "disabled " : string.Empty) " href="@(Model.Id <= 0 ? "# " : Url.Action("EditarItemPedido", "Pedidos", new { Area = "", id = Model.Id }))" role="tab" aria-selected="true">Itens pedidos</a>
+                    </li>
+                </ul>
                 <h5 class="mt-0 tituloCard">@(Model.Id <= 0 ? "Novo " : "Editar ") Pedido</h5>
                 <!form id="formPedido" action="@Url.Action("Salva", "Pedidos")" method="post">
                     <input type="hidden" name="Id" value="@Model.Id" />
                     <div class="form-row">
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-6">
                             <label>Nome do cliente</label>
                             <select class="form-control" name="Nome" data-validacao="selectObrigatorio|Nome">
                                 <option value="">Selecione o cliente</option>
@@ -28,7 +36,7 @@
                                 }
                             </select>
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-6">
                             <label>Numero da mesa</label>
                             <select class="form-control" name="Numero" data-validacao="selectObrigatorio|Mesa">
                                 <option value="">Selecione a mesa</option>
@@ -38,37 +46,7 @@
                                 }
                             </select>
                         </div>
-                        <div class="form-group col-md-3">
-                            <label>Descrição</label>
-                            <input type="text" class="form-control" name="Descricao" value="@Model.ItemPedido.Descricao">
-                        </div>                       
-                    </div> <!-- end row -->    
-                    <div class="form-row">
-                        <div class="form-group col-md-3">
-                            <a class="btn btn-info" href="@Url.Action("EditarItem", "Pedidos", new { Area = "", id = @Model.Id })"><i class="fa fa-save"></i> Add Item</a>
-                        </div>
-                        <table class="table table-striped table-bordered" cellspacing="0" width="100%">
-                            <thead>
-                                <tr>
-                                    <th>Nome do item</th>
-                                    <th>Quantidade</th>
-                                    <th>Editar</th>
-                                    <th>Excluir</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var itemPedido in Model.ItensPediddos)
-                                {
-                                    <tr>
-                                        <td>@itemPedido.Produto.Nome</td>
-                                        <td>@itemPedido.Quantidade</td>
-                                        <td style="text-align:center;"><a href="@Url.Action("EditarItem", "Pedidos", new { Area = "", id = itemPedido.Id })">Editar</a></td>
-                                        <td style="text-align:center;"><a href="@Url.Action("ExcluirItem", "Pedidos", new { Area = "", id = itemPedido.Id })">Excluir</a></td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
+                    </div> <!-- end row -->
                 </!form> <!-- end form -->
                 <div class="button-items">
                     <div class="form-group">

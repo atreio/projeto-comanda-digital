@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using ComandaDigital.Dtos;
 using ComandaDigital.Servicos;
 using Microsoft.AspNetCore.Mvc;
@@ -31,17 +32,26 @@ namespace ComandaDigital.Controllers
             try
             {
                 var pedido = new PedidoDto();
-                var itemPedido = new ItemPedidoDto();
-                pedido.ItemPedido = itemPedido;
 
                 if (id > 0)
                     pedido = pedidoServico.BuscaPedidoPorId(id);
 
-                pedido.ListaUsuarios = usuarioServico.ListarTodosUsuarios().Usuarios;
-                pedido.ListaMesas = mesaServico.ListarTodasMesas().Mesas;
-
                 return View(pedido);
             }
+            catch (Exception ex)
+            {
+                return View("~/Views/Shared/Error.cshtml", ex);
+            }
+        }
+
+        [Route("[action]")]
+        public ActionResult NovoItem(int id)
+        {
+            try
+            {
+                return View("EditarItem", new ItemPedidoDto { PedidoId = id });
+            }
+
             catch (Exception ex)
             {
                 return View("~/Views/Shared/Error.cshtml", ex);
@@ -53,17 +63,10 @@ namespace ComandaDigital.Controllers
         {
             try
             {
-                var pedido = new PedidoDto();
-                var itemPedido = new ItemPedidoDto();
-                pedido.ItemPedido = itemPedido;
-
-                if (id > 0)
-                    pedido = pedidoServico.BuscaPedidoPorId(id);
-
-                pedido.ListaUsuarios = usuarioServico.ListarTodosUsuarios().Usuarios;
-                pedido.ListaMesas = mesaServico.ListarTodasMesas().Mesas;
-
-                return View(pedido);
+                var pedido = pedidoServico.BuscarItemPorId(id);
+                var item = pedido.ItensPediddos.First(f => f.Id == id);
+                item.PedidoId = pedido.Id;
+                return View(item);
             }
             catch (Exception ex)
             {
@@ -89,6 +92,22 @@ namespace ComandaDigital.Controllers
 
                 return RedirectToAction("Index", "Pedidos", new { Area = "", id = dto.Id });
             }
+            catch (Exception ex)
+            {
+                return View("~/Views/Shared/Error.cshtml", ex);
+            }
+        }
+
+        [Route("[action]")]
+        public IActionResult SalvaItem(ItemPedidoDto dto)
+        {
+            try
+            {
+                pedidoServico.SalvarItem(dto);
+                TempData["ocorreuGravacao"] = string.Format("Item de pedido mesa {0} cadastrado com sucesso.", dto.Pedido.Mesa.Numero);
+
+                return RedirectToAction("IndexItemPedido", "Hospede", new { Area = "", Id = dto.PedidoId });
+            }            
             catch (Exception ex)
             {
                 return View("~/Views/Shared/Error.cshtml", ex);

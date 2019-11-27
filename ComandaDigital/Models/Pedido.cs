@@ -25,5 +25,10 @@ namespace ComandaDigital.Models
             MesaId = mesaId;
             UsuarioId = usuarioId;
         }
+
+        public void EditarItens(List<ItemPedido> itemPedidos)
+        {
+            this.ItensPedidos = itemPedidos;
+        }
     }
 }

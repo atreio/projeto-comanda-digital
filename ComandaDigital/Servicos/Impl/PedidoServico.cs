@@ -60,15 +60,39 @@ namespace ComandaDigital.Servicos.Impl
 
         public void NovoPedido(PedidoDto dto)
         {
-            var itemPedido = new ItemPedido(dto.ItemPedido.Quantidade, dto.ItemPedido.GarcomId, dto.ItemPedido.ProdutoId, dto.ItemPedido.PedidoId, dto.ItemPedido.Descricao);
             var pedido = new Pedido(dto.MesaId, dto.UsuarioId);
-            pedido.ItensPedidos.Add(itemPedido);
             pedidoRepository.Create(pedido);
         }
 
-        public ItemPedido CriarItemPedido(ItemPedidoDto dto)
+        public ItemPedido CriarItemPedido(ItemPedidoDto dto, Pedido pedido)
         {
-            return new ItemPedido(dto.Quantidade, dto.GarcomId, dto.ProdutoId, dto.PedidoId, dto.Descricao);
+            return new ItemPedido(dto.Quantidade, dto.GarcomId, dto.ProdutoId, pedido.Id, dto.Descricao, pedido);
+        }
+
+        public PedidoDto BuscarItemPorId(int id)
+        {
+            var pedido = pedidoRepository.GetPedidoByItemId(id);
+            if (pedido == null)
+                return null;
+            var dto = Mapper.Map<PedidoDto>(pedido);
+            dto.ItensVinculados = pedido.ItensPedidos.Select(p => p.PedidoId).ToList();
+            return dto;
+        }
+
+        public void SalvarItem(ItemPedidoDto dto)
+        {
+            var pedido = pedidoRepository.GetById(dto.PedidoId);
+
+            if (dto.Id > 0)
+            {
+                var item = CriarItemPedido(dto, pedido);
+                pedido.ItensPedidos.Add(item);
+            }
+            else
+            {
+                var item = pedido.ItensPedidos.First(i => i.Id.Equals(dto.Id));
+                item.Editar(dto.Quantidade, dto.GarcomId, dto.ProdutoId, dto.ProdutoId, dto.Descricao);
+            }
         }
     }
 }

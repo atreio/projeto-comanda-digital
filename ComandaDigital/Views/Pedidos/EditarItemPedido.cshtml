@@ -14,35 +14,50 @@
     <div class="col-12">
         <div class="card m-b-30">
             <div class="card-body">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link show" href="@Url.Action("Editar", "Pedidos", new { Area = "", id = Model.PedidoId })" role="tab" aria-selected="true">Pedidos</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link active @(Model.Id <= 0 ? "disabled " : string.Empty) " href="@(Model.Id <= 0 ? "# " : Url.Action("EditarItemPedido", "Pedidos", new { Area = "", id = Model.PedidoId }))" role="tab" aria-selected="true">Itens pedidos</a>
+                    </li>
+                </ul>
                 <h5 class="mt-0 tituloCard">@(Model.Id <= 0 ? "Novo " : "Editar ") Itens</h5>
-                <!form id="formPedido" action="@Url.Action("Salva", "Itens pedidos")" method="post">
+                <!form id="formPedido" action="@Url.Action("SalvaItem", "Itens pedidos")" method="post">
+                    <input type="hidden" name="HospedeId" value="@Model.PedidoId" />
                     <input type="hidden" name="Id" value="@Model.Id" />
                     <div class="form-row">
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                             <label>Nome do item</label>
-                            <select class="form-control" name="Produto_Id" data-validacao="selectObrigatorio|Nome">
+                            <select class="form-control" name="ProdutoId" data-validacao="selectObrigatorio|Produto">
                                 <option value="">Selecione o item</option>
-                                @foreach (var nomeProduto in Model.ListaProdutos)
+                                @foreach (var nomeProduto in Model.Produtos)
                                 {
-                                    <!option value="@nomeProduto.ID" @(Model.UsuarioId == nomeProduto.ID ? "selected" : string.Empty)>@nomeProduto.Nome</!option>
+                                    <!option value="@nomeProduto.ID" @(Model.ProdutoId == nomeProduto.ID ? "selected" : string.Empty)>@nomeProduto.Nome</!option>
                                 }
                             </select>
                         </div>
-                        <div class="form-group col-md-3">
-                            <label>Numero da mesa</label>
-                            <select class="form-control" name="Numero" data-validacao="selectObrigatorio|Mesa">
+                        <div class="form-group col-md-4">
+                            <label>Numero do garçom</label>
+                            <select class="form-control" name="GarcomId" data-validacao="selectObrigatorio|Garçom">
                                 <option value="">Selecione a mesa</option>
-                                @foreach (var numeroMesa in Model.ListaMesas)
+                                @foreach (var nomeGarçom in Model.Usuarios)
                                 {
-                                    <!option value="@numeroMesa.Id" @(Model.MesaId == numeroMesa.Id ? "selected" : string.Empty)>@numeroMesa.Numero</!option>
+                                    <!option value="@nomeGarçom.Id" @(Model.UsuarioId == nomeGarçom.Id ? "selected" : string.Empty)>@nomeGarçom.Nome</!option>
                                 }
                             </select>
                         </div>
-                        <div class="form-group col-md-3">
-                            <label>Descrição</label>
-                            <input type="text" class="form-control" name="Descricao" value="@Model.ItemPedido.Descricao">
+                        <div class="form-group col-md-4">
+                            <label>Quantidade</label>
+                            <input type="text" class="form-control" name="Quantidade" value="@Model.Quantidade">
                         </div>
                     </div> <!-- end row -->
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label>Observações</label>
+                            <input type="text" class="form-control" name="Descricao" value="@Model.Descricao">
+                        </div>
+                    </div>
                 </!form> <!-- end form -->
                 <div class="button-items">
                     <div class="form-group">
