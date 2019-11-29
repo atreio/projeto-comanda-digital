@@ -8,6 +8,8 @@ namespace ComandaDigital.Dtos
         public PedidoDto()
         {
             ItensPediddos = new List<ItemPedidoDto>();
+            ListaUsuarios = new List<UsuarioDto>();
+            ListaMesas = new List<MesaDto>();
             ItensVinculados = new List<int>();
         }
 
