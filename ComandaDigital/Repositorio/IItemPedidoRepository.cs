@@ -3,8 +3,7 @@ using ComandaDigital.Servicos.Base;
 
 namespace ComandaDigital.Repositorio
 {
-    public interface IPedidoRepository : ICrudRepository<Pedido>
+    public interface IItemPedidoRepository : ICrudRepository<ItemPedido>
     {
-        Pedido GetPedidoByItemId(int id);
     }
 }

@@ -1,0 +1,80 @@
+﻿@model ComandaDigital.Dtos.ItemPedidoListDto;
+@using ComandaDigital.Enums;
+@using ComandaDigital.Helpers
+@{
+    ViewData["Title"] = "Pedido";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <h4 class="page-title">Pedidos</h4>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card m-b-30">
+            <div class="card-body">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link show" href="@Url.Action("Editar", "Pedidos", new { Area = "", id = Model.PedidoId })" role="tab" aria-selected="true">Pedidos</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link active" href="@Url.Action("EditarItemPedido", "Pedidos", new { Area = "", id = Model.PedidoId })" role="tab" aria-selected="true">Itens pedidos</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <h5 class="mt-0 tituloCard">Listagem de pedidoss</h5>
+                    @if (TempData["ocorreuGravacao"] != null)
+                    {
+                        <div class="alert alert-success alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4><i class="icon fa fa-check"></i> Sucesso</h4>
+                            @TempData["ocorreuGravacao"]
+                        </div>
+                    }
+                    <table id="tablePedidos" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Numero da mesa</th>
+                                <th>Nome do cliente</th>
+                                <th>Editar</th>
+                                <th>Excluir</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var pedido in Model.ItensPedidos)
+                            {
+                                <tr>
+                                    <td>@pedido.Produto.Nome</td>
+                                    <td>@pedido.Usuario.Nome</td>
+                                    <td style="text-align:center;"><a href="@Url.Action("EditarItem", "Pedidos", new { Area = "", id = pedido.Id })">Editar</a></td>
+                                    <td style="text-align:center;"><a href="@Url.Action("Excluir", "Pedidos", new { Area = "", id = pedido.Id })">Excluir</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div class="button-items">
+                        <div class="form-group">
+                            <div>
+                                <a class="btn btn-info" href="@Url.Action("NovoItem", "Pedidos", new { Area = "" })"><i class="fa fa-plus-square"></i> INCLUIR</a>
+                                <a class="btn btn-secondary" href="@Url.Action("Index", "Home", new { Area = "" })"><i class="fa fa-backward"></i> VOLTAR</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div> <!-- end row -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#tablePedidos').DataTable({
+            "paging": true,
+            "ordering": false,
+            "info": false
+        });
+    });
+</script>
+
