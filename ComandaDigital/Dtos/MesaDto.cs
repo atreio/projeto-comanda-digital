@@ -10,8 +10,10 @@ namespace ComandaDigital.Dtos
         public string Descricao { get; set; }
         public int Quantidade { get; set; }
         public int EstabelecimentoId { get; set; }
-        public Estabelecimento Estabelecimento { get; set; }
-        public List<PedidoDto> Pedidos { get; set; }
+        public EstabelecimentoDto Estabelecimento { get; set; }
+        public bool Ocupada { get; set; }
+        public PedidoDto Pedido { get; set; }
+        public int PedidoId { get; set; }
     }
 
     public class MesaListDto

@@ -35,9 +35,6 @@ namespace ComandaDigital.Servicos.Impl
             var pedido = pedidoRepository.GetById(dto.Id);
             if (pedido == null)
                 return;
-
-            pedido.Editar(dto.MesaId, dto.UsuarioId);
-            pedidoRepository.Update(pedido);
         }
 
         public void ExcluirPedido(PedidoDto dto)
@@ -54,16 +51,16 @@ namespace ComandaDigital.Servicos.Impl
             var pedido = pedidoRepository.GetAll();
             var listPedidoDto = new PedidoListDto();
 
-            listPedidoDto.Pedidos = Mapper.Map<List<PedidoDto>>(pedido.OrderBy(d => d.Mesa.Numero));
+            listPedidoDto.Pedidos = Mapper.Map<List<PedidoDto>>(pedido);
             return listPedidoDto;
         }
 
-        public void NovoPedido(PedidoDto dto)
+        public PedidoDto NovoPedido(PedidoDto dto)
         {
-            var itemPedido = new ItemPedido(dto.ItemPedido.Quantidade, dto.ItemPedido.GarcomId, dto.ItemPedido.ProdutoId, dto.ItemPedido.PedidoId, dto.ItemPedido.Descricao);
-            var pedido = new Pedido(dto.MesaId, dto.UsuarioId);
-            pedido.ItensPedidos.Add(itemPedido);
+            var pedido = new Pedido(dto.GarcomId, dto.ClienteDocumento, dto.ClienteNome);
             pedidoRepository.Create(pedido);
+
+            return Mapper.Map<PedidoDto>(pedido);
         }
 
         public ItemPedido CriarItemPedido(ItemPedidoDto dto)

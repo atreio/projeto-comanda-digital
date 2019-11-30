@@ -1,5 +1,6 @@
 ﻿using ComandaDigital.Models.Base;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ComandaDigital.Models
 {
@@ -7,23 +8,32 @@ namespace ComandaDigital.Models
     {
         public Pedido() { }
 
-        public Pedido(int mesaId, int usuarioId)
+        public Pedido(int garcomId, string clienteDocumento, string clienteNome)
         {
-            MesaId = mesaId;
-            UsuarioId = usuarioId;
+            GarcomId = garcomId;
             ItensPedidos = new List<ItemPedido>();
+            EmAberto = true;
+            ClienteDocumento = clienteDocumento;
+            ClienteNome = clienteNome;
         }
 
-        public int MesaId { get; set; }
-        public Mesa Mesa { get; set; }
-        public int UsuarioId { get; set; }
-        public Usuario Usuario { get; set; }
-        public List<ItemPedido> ItensPedidos { get; set; }
+        public virtual int GarcomId { get; set; }
+        public virtual Usuario Garcom { get; set; }
+        public virtual List<ItemPedido> ItensPedidos { get; set; }
+        public bool EmAberto { get; set; }
+        public string ClienteNome { get; set; }
+        public string ClienteDocumento { get; set; }
 
-        public void Editar(int mesaId, int usuarioId)
+        public decimal ValorTotal()
         {
-            MesaId = mesaId;
-            UsuarioId = usuarioId;
+            var valorTotal = ItensPedidos.Sum(i => i.Produto.ValorVenda * i.Quantidade);
+            return valorTotal;
         }
+
+        public void EncerrarConta()
+        {
+            EmAberto = false;
+        }
+
     }
 }

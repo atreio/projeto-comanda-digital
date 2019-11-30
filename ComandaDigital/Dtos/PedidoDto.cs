@@ -11,14 +11,12 @@ namespace ComandaDigital.Dtos
         }
 
         public int Id { get; set; }
-        public int MesaId { get; set; }
-        public Mesa Mesa { get; set; }
-        public int UsuarioId { get; set; }
-        public Usuario Usuario { get; set; }
-        public ItemPedidoDto ItemPedido { get; set; }
+        public int GarcomId { get; set; }
+        public UsuarioDto Garcom { get; set; }
         public List<ItemPedidoDto> ItensPediddos { get; set; }
-        public List<UsuarioDto> ListaUsuarios { get; set; }
-        public List<MesaDto> ListaMesas { get; set; }
+        public string ClienteNome { get; set; }
+        public string ClienteDocumento { get; set; }
+        public bool EmAberto { get; set; }
     }
 
     public class PedidoListDto

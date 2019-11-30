@@ -8,31 +8,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ComandaDigital.Migrations
 {
     [DbContext(typeof(ComandaDigitalContext))]
-    [Migration("20191106152858_alteracao2")]
-    partial class alteracao2
+    [Migration("20191130215545_vaiDa")]
+    partial class vaiDa
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
-
-            modelBuilder.Entity("ComandaDigital.Models.Cliente", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Cpf");
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("Nome");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Cliente");
-                });
 
             modelBuilder.Entity("ComandaDigital.Models.Estabelecimento", b =>
                 {
@@ -93,11 +77,17 @@ namespace ComandaDigital.Migrations
 
                     b.Property<string>("Numero");
 
+                    b.Property<bool>("Ocupada");
+
+                    b.Property<int>("PedidoAtivoId");
+
                     b.Property<int>("Quantidade");
 
                     b.HasKey("Id");
 
                     b.HasIndex("EstabelecimentoId");
+
+                    b.HasIndex("PedidoAtivoId");
 
                     b.ToTable("Mesa");
                 });
@@ -107,15 +97,17 @@ namespace ComandaDigital.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("MesaId");
+                    b.Property<int>("ClienteId");
 
-                    b.Property<int>("UsuarioId");
+                    b.Property<bool>("EmAberto");
+
+                    b.Property<int>("GarcomId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MesaId");
+                    b.HasIndex("ClienteId");
 
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex("GarcomId");
 
                     b.ToTable("Pedido");
                 });
@@ -131,7 +123,7 @@ namespace ComandaDigital.Migrations
 
                     b.Property<decimal?>("ValorCusto");
 
-                    b.Property<decimal?>("ValorVenda");
+                    b.Property<decimal>("ValorVenda");
 
                     b.HasKey("Id");
 
@@ -175,7 +167,7 @@ namespace ComandaDigital.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ComandaDigital.Models.Usuario", "Usuario")
-                        .WithMany("ItensPedidos")
+                        .WithMany()
                         .HasForeignKey("UsuarioId");
                 });
 
@@ -185,18 +177,23 @@ namespace ComandaDigital.Migrations
                         .WithMany("Mesas")
                         .HasForeignKey("EstabelecimentoId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ComandaDigital.Models.Pedido", "PedidoAtivo")
+                        .WithMany()
+                        .HasForeignKey("PedidoAtivoId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("ComandaDigital.Models.Pedido", b =>
                 {
-                    b.HasOne("ComandaDigital.Models.Mesa", "Mesa")
-                        .WithMany("Pedidos")
-                        .HasForeignKey("MesaId")
+                    b.HasOne("ComandaDigital.Models.Usuario", "Cliente")
+                        .WithMany()
+                        .HasForeignKey("ClienteId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("ComandaDigital.Models.Usuario", "Usuario")
-                        .WithMany("Pedidos")
-                        .HasForeignKey("UsuarioId")
+                    b.HasOne("ComandaDigital.Models.Usuario", "Garcom")
+                        .WithMany()
+                        .HasForeignKey("GarcomId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

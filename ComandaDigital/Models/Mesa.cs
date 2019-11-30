@@ -17,10 +17,23 @@ namespace ComandaDigital.Models
         public string Numero { get; set; }
         public string Descricao { get; set; }
         public int Quantidade { get; set; }
-        public int EstabelecimentoId { get; set; }
-        public Estabelecimento Estabelecimento { get; set; }
-        public List<Pedido> Pedidos { get; set; }
+        public bool Ocupada { get; set; }
+        public virtual Pedido Pedido { get; set; }
+        public virtual int? PedidoId { get; set; }
 
+        public void AlocarCliente(Pedido pedido)
+        {
+            Pedido = pedido;
+            PedidoId = pedido.Id;
+            Ocupada = true;
+        }
+
+        public void LiberarMesa()
+        {
+            Ocupada = false;
+            Pedido = null;
+            PedidoId = null;
+        }
         public void Editar(string numero, string descricao, int quantidade)
         {
             Numero = numero;

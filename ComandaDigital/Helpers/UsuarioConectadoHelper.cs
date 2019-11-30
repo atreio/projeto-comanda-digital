@@ -22,7 +22,7 @@ namespace ComandaDigital.Helpers
         {
             if (claimsIdentity != null)
             {
-                var c = claimsIdentity.FindFirst("Id");
+                var c = claimsIdentity.FindFirst("IdUsuario");
 
                 if (c != null)
                 {

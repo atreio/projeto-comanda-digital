@@ -35,13 +35,9 @@ namespace ComandaDigital.Controllers
             {
                 var pedido = new PedidoDto();
                 var itemPedido = new ItemPedidoDto();
-                pedido.ItemPedido = itemPedido;
 
                 if (id > 0)
                     pedido = pedidoServico.BuscaPedidoPorId(id);
-
-                pedido.ListaUsuarios = usuarioServico.ListarTodosUsuarios().Usuarios;
-                pedido.ListaMesas = mesaServico.ListarTodasMesas().Mesas;
 
                 return View(pedido);
             }
@@ -56,16 +52,7 @@ namespace ComandaDigital.Controllers
         {
             try
             {
-                if (dto.Id <= 0)
-                {
-                    pedidoServico.NovoPedido(dto);
-                    TempData["ocorreuGravacao"] = string.Format("Pedido da {0} Salvo com sucesso.", dto.Mesa.Numero);
-                }
-                else
-                {
-                    pedidoServico.EditarPedido(dto);
-                    TempData["ocorreuGravacao"] = string.Format("Pedido da {0} editado com sucesso.", dto.Mesa.Numero);
-                }
+                
 
                 return RedirectToAction("Index", "Pedidos", new { Area = "", id = dto.Id });
             }

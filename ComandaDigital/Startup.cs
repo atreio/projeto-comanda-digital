@@ -32,7 +32,9 @@ namespace ComandaDigital
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContext<ComandaDigitalContext>(options =>
-                    options.UseMySql(Configuration.GetConnectionString("ComandaDigitalContext"), builder => builder.MigrationsAssembly("ComandaDigital")));
+                    options
+                .UseLazyLoadingProxies()
+                .UseMySql(Configuration.GetConnectionString("ComandaDigitalContext"), builder => builder.MigrationsAssembly("ComandaDigital")));
 
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<IEstabelecimentoRepository, EstabelecimentoRepository>();
@@ -45,7 +47,7 @@ namespace ComandaDigital
             services.AddScoped<ICadastroProdutoServico, CadastroProdutoServico>();
             services.AddScoped<ICadastroMesaServico, CadastroMesaServico>();
             services.AddScoped<IPedidoServico, PedidoServico>();
-
+            services.AddScoped<ISalaoService, SalaoService>();
             Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<Usuario, UsuarioDto>();

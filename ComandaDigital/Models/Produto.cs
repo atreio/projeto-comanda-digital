@@ -7,7 +7,7 @@ namespace ComandaDigital.Models
     {
         public Produto() { }
 
-        public Produto(string nome, decimal? valorCusto, decimal? valorVenda)
+        public Produto(string nome, decimal? valorCusto, decimal valorVenda)
         {
             Nome = nome;
             ValorCusto = valorCusto;
@@ -16,12 +16,12 @@ namespace ComandaDigital.Models
 
         public string Nome { get; set; }
         public decimal? ValorCusto { get; set; }
-        public decimal? ValorVenda { get; set; }
-        public int EstabelecimentoId { get; set; }
-        public Estabelecimento Estabelecimento { get; set; }
-        public List<ItemPedido> ItensPedidos { get; set; }
+        public decimal ValorVenda { get; set; }
+        public virtual int EstabelecimentoId { get; set; }
+        public virtual Estabelecimento Estabelecimento { get; set; }
+        public virtual List<ItemPedido> ItensPedidos { get; set; }
 
-        public void Editar(string nome, decimal? valorCusto, decimal? valorVenda)
+        public void Editar(string nome, decimal? valorCusto, decimal valorVenda)
         {
             Nome = nome;
             ValorCusto = valorCusto;

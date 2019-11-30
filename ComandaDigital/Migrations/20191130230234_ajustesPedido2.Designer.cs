@@ -8,31 +8,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ComandaDigital.Migrations
 {
     [DbContext(typeof(ComandaDigitalContext))]
-    [Migration("20191106125844_Alteracoes1")]
-    partial class Alteracoes1
+    [Migration("20191130230234_ajustesPedido2")]
+    partial class ajustesPedido2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
-
-            modelBuilder.Entity("ComandaDigital.Models.Cliente", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Cpf");
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("Nome");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Cliente");
-                });
 
             modelBuilder.Entity("ComandaDigital.Models.Estabelecimento", b =>
                 {
@@ -51,11 +35,15 @@ namespace ComandaDigital.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("CozinheiroId");
+
                     b.Property<DateTime?>("DataAtualizacao");
 
                     b.Property<DateTime?>("DataCriacao");
 
                     b.Property<string>("Descricao");
+
+                    b.Property<int>("GarcomId");
 
                     b.Property<int>("PedidoId");
 
@@ -65,7 +53,7 @@ namespace ComandaDigital.Migrations
 
                     b.Property<int>("Status");
 
-                    b.Property<int>("UsuarioId");
+                    b.Property<int?>("UsuarioId");
 
                     b.HasKey("Id");
 
@@ -85,15 +73,17 @@ namespace ComandaDigital.Migrations
 
                     b.Property<string>("Descricao");
 
-                    b.Property<int>("EstabelecimentoId");
-
                     b.Property<string>("Numero");
+
+                    b.Property<bool>("Ocupada");
+
+                    b.Property<int?>("PedidoId");
 
                     b.Property<int>("Quantidade");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EstabelecimentoId");
+                    b.HasIndex("PedidoId");
 
                     b.ToTable("Mesa");
                 });
@@ -103,15 +93,17 @@ namespace ComandaDigital.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("MesaId");
+                    b.Property<string>("ClienteDocumento");
 
-                    b.Property<int>("UsuarioId");
+                    b.Property<string>("ClienteNome");
+
+                    b.Property<bool>("EmAberto");
+
+                    b.Property<int>("GarcomId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MesaId");
-
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex("GarcomId");
 
                     b.ToTable("Pedido");
                 });
@@ -127,7 +119,7 @@ namespace ComandaDigital.Migrations
 
                     b.Property<decimal?>("ValorCusto");
 
-                    b.Property<decimal?>("ValorVenda");
+                    b.Property<decimal>("ValorVenda");
 
                     b.HasKey("Id");
 
@@ -171,36 +163,29 @@ namespace ComandaDigital.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ComandaDigital.Models.Usuario", "Usuario")
-                        .WithMany("ItensPedidos")
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany()
+                        .HasForeignKey("UsuarioId");
                 });
 
             modelBuilder.Entity("ComandaDigital.Models.Mesa", b =>
                 {
-                    b.HasOne("ComandaDigital.Models.Estabelecimento", "Estabelecimento")
-                        .WithMany("Mesas")
-                        .HasForeignKey("EstabelecimentoId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("ComandaDigital.Models.Pedido", "Pedido")
+                        .WithMany()
+                        .HasForeignKey("PedidoId");
                 });
 
             modelBuilder.Entity("ComandaDigital.Models.Pedido", b =>
                 {
-                    b.HasOne("ComandaDigital.Models.Mesa", "Mesa")
-                        .WithMany("Pedidos")
-                        .HasForeignKey("MesaId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("ComandaDigital.Models.Usuario", "Usuario")
-                        .WithMany("Pedidos")
-                        .HasForeignKey("UsuarioId")
+                    b.HasOne("ComandaDigital.Models.Usuario", "Garcom")
+                        .WithMany()
+                        .HasForeignKey("GarcomId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("ComandaDigital.Models.Produto", b =>
                 {
                     b.HasOne("ComandaDigital.Models.Estabelecimento", "Estabelecimento")
-                        .WithMany("Produtos")
+                        .WithMany()
                         .HasForeignKey("EstabelecimentoId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

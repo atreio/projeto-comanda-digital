@@ -37,7 +37,10 @@
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Pedidos" asp-action="Index">Pedidos</a>
+                            <a class="nav-link" asp-area="" asp-controller="Salao" asp-action="Index">Salão</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Cozinha" asp-action="Index">Cozinha</a>
                         </li>
                         @if (UsuarioConectadoHelper.GetTipo((User.Identity as ClaimsIdentity)) == "Gerente")
                         {
