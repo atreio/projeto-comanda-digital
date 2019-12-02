@@ -1,5 +1,4 @@
-﻿using ComandaDigital.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace ComandaDigital.Dtos
 {

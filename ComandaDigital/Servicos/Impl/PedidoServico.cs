@@ -63,9 +63,32 @@ namespace ComandaDigital.Servicos.Impl
             return Mapper.Map<PedidoDto>(pedido);
         }
 
-        public ItemPedido CriarItemPedido(ItemPedidoDto dto)
+        public ItemPedido CriarItemPedido(ItemPedidoDto dto, Pedido pedido)
         {
-            return new ItemPedido(dto.Quantidade, dto.GarcomId, dto.ProdutoId, dto.PedidoId, dto.Descricao);
+            return new ItemPedido(dto.Quantidade, dto.GarcomId, dto.ProdutoId, dto.PedidoId, dto.Descricao, pedido);
+        }
+
+        public PedidoDto BuscarItemPorId(int id)
+        {
+            try
+            {
+                var pedido = pedidoRepository.GetPedidoByItemId(id);
+                if (pedido == null)
+                    return null;
+                var dto = Mapper.Map<PedidoDto>(pedido);
+                dto.ClienteDocumento = pedido..Select(h => h.UsuarioId).ToList();
+
+                return pedido == null ? null : Mapper.Map<PedidoDto>(pedido);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void SalvarItem(ItemPedidoDto dto)
+        {
+            throw new NotImplementedException();
         }
     }
 }
