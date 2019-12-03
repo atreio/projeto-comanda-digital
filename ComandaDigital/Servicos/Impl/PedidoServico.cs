@@ -76,9 +76,9 @@ namespace ComandaDigital.Servicos.Impl
                 if (pedido == null)
                     return null;
                 var dto = Mapper.Map<PedidoDto>(pedido);
-                dto.ClienteDocumento = pedido..Select(h => h.UsuarioId).ToList();
+                dto.ItensVinculados = pedido.ItensPedidos.Select(p => p.PedidoId).ToList();
 
-                return pedido == null ? null : Mapper.Map<PedidoDto>(pedido);
+                return dto;
             }
             catch (Exception ex)
             {
@@ -88,7 +88,19 @@ namespace ComandaDigital.Servicos.Impl
 
         public void SalvarItem(ItemPedidoDto dto)
         {
-            throw new NotImplementedException();
+            var pedido = pedidoRepository.GetById(dto.PedidoId);
+
+            if (dto.Id <= 0)
+            {
+                var Item = CriarItemPedido(dto, pedido);
+                pedido.ItensPedidos.Add(Item);
+            }
+            else
+            {
+                var Item = pedido.ItensPedidos.First(i => i.Id.Equals(dto.Id));
+                Item.Editar(dto.Quantidade, dto.GarcomId, dto.ProdutoId, dto.PedidoId, dto.Descricao);
+            }
+            pedidoRepository.Update(pedido);
         }
     }
 }

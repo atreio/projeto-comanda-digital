@@ -1,4 +1,4 @@
-﻿@model ComandaDigital.Dtos.MesaListDto;
+﻿@model ComandaDigital.Dtos.PedidoListDto;
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="page-title-box">
-            <h4 class="page-title">Salão</h4>
+            <h4 class="page-title">Pedidos</h4>
         </div>
     </div>
 </div>
@@ -37,12 +37,10 @@
                                 <td style="text-align:center;">@(mesa.Ocupada ? mesa.Pedido.ClienteNome : "-")</td>
                                 <td style="text-align:center;">@(mesa.Ocupada ? mesa.Pedido.Garcom.Nome : "-")</td>
                                 <td style="text-align:center;">
-                                    @if (mesa.Ocupada)
-                                    {
-                                        <a href="@Url.Action("IndexItem", "Salao", new { pedidoId = mesa.Pedido.Id })">Add itens</a>
+                                    @if (mesa.Ocupada) {
+                                        <a href="@Url.Action("Detalhes", "Salao", new { mesaId = mesa.Id })">Add itens</a>
                                     }
-                                    else
-                                    {
+                                    else {
                                         <a href="@Url.Action("Alocar", "Salao", new { mesaId = mesa.Id })">Alocar</a>
                                     }
                                 </td>

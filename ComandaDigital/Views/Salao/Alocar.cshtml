@@ -18,7 +18,7 @@
             <div class="card-body">
                 <!form id="formAlocar" action="@Url.Action("SalvaAlocacao")" method="post">
                     <input type="hidden" name="mesaId" value="@Model.Id" />
-                    <input type="hidden" name="garconId" value="@UsuarioConectadoHelper.GetId((User.Identity as ClaimsIdentity))" />
+                    <input type="hidden" name="garcomId" value="@UsuarioConectadoHelper.GetId((User.Identity as ClaimsIdentity))" />
                     <div class="form-row">
                         <div class="form-group col-md-2">
                             <label>Mesa</label>

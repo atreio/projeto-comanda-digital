@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ComandaDigital.Models;
+﻿using ComandaDigital.Models;
 using ComandaDigital.Repositorio;
 
 namespace ComandaDigital.Servicos.Impl

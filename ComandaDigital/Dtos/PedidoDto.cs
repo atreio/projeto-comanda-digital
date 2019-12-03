@@ -7,6 +7,7 @@ namespace ComandaDigital.Dtos
         public PedidoDto()
         {
             ItensPediddos = new List<ItemPedidoDto>();
+            ItensVinculados = new List<int>();
         }
 
         public int Id { get; set; }
@@ -16,6 +17,7 @@ namespace ComandaDigital.Dtos
         public string ClienteNome { get; set; }
         public string ClienteDocumento { get; set; }
         public bool EmAberto { get; set; }
+        public List<int> ItensVinculados { get; set; }
     }
 
     public class PedidoListDto
