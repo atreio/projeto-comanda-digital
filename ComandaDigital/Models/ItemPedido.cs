@@ -19,10 +19,10 @@ namespace ComandaDigital.Models
             Pedido = pedido;
         }
 
-        public int Quantidade { get; set; }
-        public DateTime? DataCriacao { get; set; }
-        public DateTime? DataAtualizacao { get; set; }
-        public StatusPedido Status { get; set; }
+        public virtual int Quantidade { get; set; }
+        public virtual DateTime? DataCriacao { get; set; }
+        public virtual DateTime? DataAtualizacao { get; set; }
+        public virtual StatusPedido Status { get; set; }
         public virtual int CozinheiroId { get; set; }
         public virtual int GarcomId { get; set; }
         public virtual Usuario Usuario { get; set; }
@@ -30,7 +30,7 @@ namespace ComandaDigital.Models
         public virtual Produto Produto { get; set; }
         public virtual int PedidoId { get; set; }
         public virtual Pedido Pedido { get; set; }
-        public string Descricao { get; set; }
+        public virtual string Descricao { get; set; }
 
         public void Editar(int quantidade, int garcomId, int produtoId, int pedidoId, string descricao)
         {

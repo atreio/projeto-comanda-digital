@@ -1,4 +1,6 @@
 ﻿@model ComandaDigital.Dtos.ItemPedidoListDto;
+@using System.Security.Claims
+@using ComandaDigital.Helpers
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,7 +9,7 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="page-title-box">
-            <h4 class="page-title">Salão</h4>
+            <h4 class="page-title">Itens</h4>
         </div>
     </div>
 </div>
@@ -17,12 +19,13 @@
         <div class="card m-b-30">
             <div class="card-body">
                 <div class="tab-content">
-                    <h5 class="mt-0 tituloCard">Listagem de pedidos</h5>
+                    <h5 class="mt-0 tituloCard">Listagem de Itesn</h5>
+                    <input type="hidden" name="produtoId" value="@Model.PedidoId" />
+                    <input type="hidden" name="garcomId" value="@UsuarioConectadoHelper.GetId((User.Identity as ClaimsIdentity))" />
                     <table id="tableMesas" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th>Nome do cliente</th>
-                                <th>Garçon</th>
+                                <th>Quantidade</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
@@ -30,15 +33,18 @@
                             @foreach (var item in Model.ItensPedidos)
                             {
                                 <tr>
-                                    <td>@item.Pedido.ClienteNome</td>
-                                    <td style="text-align:center;">@item.Pedido.Garcom.Nome</td>
-                                    <td style="text-align:center;">
-                                        <a href="@Url.Action("EditaItem", "Salao", new { id = item.Id })">Add itens</a>
-                                    </td>
+                                    <td>@item.Quantidade</td>
                                 </tr>
                             }
                         </tbody>
                     </table>
+                    <div class="button-items">
+                        <div class="form-group">
+                            <div>
+                                <a class="btn btn-primary" href="@Url.Action("EditaItem", "Pedidos", new { produtoId = Model.PedidoId })"><i class="fa fa-plus-square"></i> NOVO Item</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

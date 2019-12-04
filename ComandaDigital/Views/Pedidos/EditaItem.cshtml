@@ -1,0 +1,54 @@
+﻿@model ComandaDigital.Dtos.ItemPedidoDto
+@using System.Security.Claims
+@using ComandaDigital.Helpers
+@{
+    ViewData["Title"] = "Alocar";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <h4 class="page-title">Alocar Cliente</h4>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card m-b-30">
+            <div class="card-body">
+                <!form id="formItem" action="@Url.Action("SalvaItem")" method="post">
+                    <input type="hidden" name="pedidoId" value="@Model.PedidoId" />
+                    <input type="hidden" name="garcomId" value="@UsuarioConectadoHelper.GetId((User.Identity as ClaimsIdentity))" />
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label>Nome do item</label>
+                            <select class="form-control" name="ProdutoId" data-validacao="selectObrigatorio|Produto">
+                                <option value="">Selecione o item</option>
+                                @foreach (var nomeProduto in Model.Produtos)
+                                {
+                                    <!option value="@nomeProduto.ID" @(Model.ProdutoId == nomeProduto.ID ? "selected" : string.Empty)>@nomeProduto.Nome</!option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Quantidade</label>
+                            <input type="text" class="form-control" name="Quantidade" data-validacao="inputObrigatoria|Quantidade" />
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Descrição</label>
+                            <input type="text" class="form-control" name="Descricao" />
+                        </div>
+                    </div> <!-- end row -->
+                </!form> <!-- end form -->
+                <div class="button-items">
+                    <div class="form-group">
+                        <div>
+                            <a class="btn btn-info" href="#" onclick="validarForm('formItem')"><i class="fa fa-save"></i> SALVAR</a>
+                            <a class="btn btn-secondary" href="@Url.Action("Index")"><i class="fa fa-backward"></i> VOLTAR</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>

@@ -11,10 +11,12 @@ namespace ComandaDigital.Servicos.Impl
     public class PedidoServico : IPedidoServico
     {
         private readonly IPedidoRepository pedidoRepository;
+        private readonly IItemPedidoRepository itemPedidoRepository;
 
-        public PedidoServico(IPedidoRepository pedidoRepository)
+        public PedidoServico(IPedidoRepository pedidoRepository, IItemPedidoRepository itemPedidoRepository)
         {
             this.pedidoRepository = pedidoRepository;
+            this.itemPedidoRepository = itemPedidoRepository;
         }
 
         public PedidoDto BuscaPedidoPorId(int id)
@@ -55,6 +57,19 @@ namespace ComandaDigital.Servicos.Impl
             return listPedidoDto;
         }
 
+        public ItemPedidoListDto ListaItemPorPedido(int id)
+        {
+            var pedido = itemPedidoRepository.GetById(id);
+            if (pedido == null)
+                return null;
+            var listItens = new ItemPedidoListDto();
+            listItens.ItensPedidos = Mapper.Map<List<ItemPedidoDto>>(pedido);
+
+            listItens.ItensPedidos.Where(i => i.PedidoId.Equals(id)).ToList();
+            //dto.ItensVinculados = pedido.ItensPedidos.Select(p => p.PedidoId).ToList();
+            return listItens;
+        }
+
         public PedidoDto NovoPedido(PedidoDto dto)
         {
             var pedido = new Pedido(dto.GarcomId, dto.ClienteDocumento, dto.ClienteNome);
@@ -71,8 +86,8 @@ namespace ComandaDigital.Servicos.Impl
         public PedidoDto BuscarItemPorId(int id)
         {
             try
-            {
-                var pedido = pedidoRepository.GetPedidoByItemId(id);
+            {               
+                var pedido = pedidoRepository.GetById(id);
                 if (pedido == null)
                     return null;
                 var dto = Mapper.Map<PedidoDto>(pedido);

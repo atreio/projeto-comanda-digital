@@ -11,5 +11,6 @@ namespace ComandaDigital.Servicos
         PedidoDto BuscarItemPorId(int id);
         void SalvarItem(ItemPedidoDto dto);
         void ExcluirPedido(PedidoDto dto);
+        ItemPedidoListDto ListaItemPorPedido(int id);
     }
 }

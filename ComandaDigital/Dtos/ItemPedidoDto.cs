@@ -8,7 +8,7 @@ namespace ComandaDigital.Dtos
     {
         public ItemPedidoDto()
         {
-            Produto = new ProdutoDto();
+            Produtos = new List<ProdutoDto>();
             Usuario = new UsuarioDto();
             Pedido = new PedidoDto();
         }

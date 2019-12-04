@@ -41,6 +41,7 @@ namespace ComandaDigital
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
             services.AddScoped<IMesaRepository, MesaRepository>();
             services.AddScoped<IPedidoRepository, PedidoRepository>();
+            services.AddScoped<IItemPedidoRepository, ItemPedidoRepository>();
 
             services.AddScoped<ICadastroUsuarioServico, CadastroUsuarioServico>();
             services.AddScoped<IEstabelecimentoServico, EstabelecimentoServico>();
@@ -48,6 +49,8 @@ namespace ComandaDigital
             services.AddScoped<ICadastroMesaServico, CadastroMesaServico>();
             services.AddScoped<IPedidoServico, PedidoServico>();
             services.AddScoped<ISalaoService, SalaoService>();
+            services.AddScoped<ICadastroItemPedidoServico, CadastroItemPedidoServico>();
+
             Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<Usuario, UsuarioDto>();
