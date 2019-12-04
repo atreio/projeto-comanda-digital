@@ -39,9 +39,14 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Salao" asp-action="Index">Salão</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Cozinha" asp-action="Index">Cozinha</a>
-                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Cozinha<b class="caret"></b></a>
+                            <div class="dropdown-menu" aria-labelledby="themes">
+                                <a class="dropdown-item" asp-area="" asp-controller="Cozinha" asp-action="PedidoAberto">Pedidos em aberto</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Cozinha" asp-action="PedidoAndamento">Pedidos em andamento</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Cozinha" asp-action="PedidoConcluido">Pedidos em finalizados</a>
+                            </div>
+                        </li>                       
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Pedidos" asp-action="Index">Pedidos</a>
                         </li>

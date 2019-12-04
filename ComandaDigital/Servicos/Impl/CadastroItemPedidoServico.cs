@@ -28,6 +28,22 @@ namespace ComandaDigital.Servicos.Impl
             }
         }
 
+        public void EditarAndamento(int id)
+        {
+            var ItemPedido = itemPedidoRepository.GetById(id);
+
+            ItemPedido.AlterarEmAndamento();
+            itemPedidoRepository.Update(ItemPedido);
+        }
+
+        public void EditarFinalizado(int id)
+        {
+            var ItemPedido = itemPedidoRepository.GetById(id);
+
+            ItemPedido.AlterarConcluido();
+            itemPedidoRepository.Update(ItemPedido);
+        }
+
         public void EditarItemPedido(ItemPedidoDto dto)
         {
             var ItemPedido = itemPedidoRepository.GetById(dto.Id);

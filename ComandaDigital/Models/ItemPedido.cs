@@ -41,5 +41,17 @@ namespace ComandaDigital.Models
             PedidoId = pedidoId;
             Descricao = descricao;
         }
+
+        public void AlterarEmAndamento()
+        {
+            Status = StatusPedido.EmAndamento;
+            DataAtualizacao = DateTime.Now;
+        }
+
+        public void AlterarConcluido()
+        {
+            Status = StatusPedido.EmAndamento;
+            DataAtualizacao = DateTime.Now;
+        }
     }
 }

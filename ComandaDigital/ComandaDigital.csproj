@@ -16,11 +16,6 @@
   </ItemGroup>
 
 
-  <ItemGroup>
-    <Folder Include="Views\Cozinha\" />
-  </ItemGroup>
-
-
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>
