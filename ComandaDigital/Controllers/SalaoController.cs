@@ -28,12 +28,14 @@ namespace ComandaDigital.Controllers
         }
 
         [Route("[action]")]
-        public IActionResult IndexItem(int pedidoId)
+        public IActionResult IndexItem()
         {
             try
             {
-                var itens = pedidoServico.BuscarItemPorId(pedidoId).ItensPediddos;
-                return View(new ItemPedidoListDto { ItensPedidos = itens, PedidoId = pedidoId });
+                var itens = pedidoServico.ListaTodosItemPedido();
+                return View(itens);
+                //var itens = pedidoServico.BuscarItemPorId(pedidoId).ItensPediddos;
+                //return View(new ItemPedidoListDto { ItensPedidos = itens, PedidoId = pedidoId });
             }
             catch (Exception ex)
             {

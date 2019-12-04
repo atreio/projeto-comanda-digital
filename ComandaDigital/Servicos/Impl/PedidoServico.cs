@@ -57,17 +57,22 @@ namespace ComandaDigital.Servicos.Impl
             return listPedidoDto;
         }
 
-        public ItemPedidoListDto ListaItemPorPedido(int id)
+        public ItemPedidoListDto ListaTodosItemPedido()
         {
-            var pedido = itemPedidoRepository.GetById(id);
-            if (pedido == null)
-                return null;
-            var listItens = new ItemPedidoListDto();
-            listItens.ItensPedidos = Mapper.Map<List<ItemPedidoDto>>(pedido);
+            var item = itemPedidoRepository.GetAll();
+            var listItem = new ItemPedidoListDto();
 
-            listItens.ItensPedidos.Where(i => i.PedidoId.Equals(id)).ToList();
-            //dto.ItensVinculados = pedido.ItensPedidos.Select(p => p.PedidoId).ToList();
-            return listItens;
+            listItem.ItensPedidos = Mapper.Map<List<ItemPedidoDto>>(item);
+            return listItem;
+            //var pedido = itemPedidoRepository.GetById(id);
+            //if (pedido == null)
+            //    return null;
+            //var listItens = new ItemPedidoListDto();
+            //listItens.ItensPedidos = Mapper.Map<List<ItemPedidoDto>>(pedido);
+
+            //listItens.ItensPedidos.Where(i => i.PedidoId.Equals(id)).ToList();
+            ////dto.ItensVinculados = pedido.ItensPedidos.Select(p => p.PedidoId).ToList();
+            //return listItens;
         }
 
         public PedidoDto NovoPedido(PedidoDto dto)

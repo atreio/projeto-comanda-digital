@@ -23,6 +23,7 @@
                             <tr>
                                 <th>Nome do cliente</th>
                                 <th>Garçon</th>
+                                <th>Descrição</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
@@ -32,9 +33,7 @@
                                 <tr>
                                     <td>@item.Pedido.ClienteNome</td>
                                     <td style="text-align:center;">@item.Pedido.Garcom.Nome</td>
-                                    <td style="text-align:center;">
-                                        <a href="@Url.Action("EditaItem", "Salao", new { id = item.Id })">Add itens</a>
-                                    </td>
+                                    <td style="text-align:center;">@item.Descricao</td>
                                 </tr>
                             }
                         </tbody>
